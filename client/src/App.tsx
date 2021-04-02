@@ -1,7 +1,8 @@
 import React from "react";
+import CharacterList from "./pages/CharacterList";
 
 function App() {
-  return <div className="App">Hellooooooo</div>;
+  return <CharacterList />;
 }
 
 export default App;

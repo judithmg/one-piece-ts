@@ -1,4 +1,4 @@
-export default function getThumbnailUrl(n) {
+export default function getThumbnailUrl(n: any) {
   switch (n) {
     case "skullLuffy":
     case 9001:
@@ -128,27 +128,7 @@ export default function getThumbnailUrl(n) {
   }
   if (n === null || n === undefined)
     return "https://onepiece-treasurecruise.com/wp-content/themes/onepiece-treasurecruise/images/noimage.png";
-  if (window.units && window.units[n - 1].incomplete) {
-    switch (window.units[n - 1].type) {
-      case "STR":
-        return "../res/blank_str.png";
 
-      case "DEX":
-        return "../res/blank_dex.png";
-
-      case "QCK":
-        return "../res/blank_qck.png";
-
-      case "PSY":
-        return "../res/blank_psy.png";
-
-      case "INT":
-        return "../res/blank_int.png";
-
-      default:
-        return "https://onepiece-treasurecruise.com/wp-content/themes/onepiece-treasurecruise/images/noimage.png";
-    }
-  }
   var id = ("0000" + n).slice(-4).replace(/(057[54])/, "0$1"); // missing aokiji image
   switch (id) {
     case "0742":
