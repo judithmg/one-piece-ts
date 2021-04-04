@@ -16,4 +16,22 @@ export interface characterInterface {
     maxRCV?: number
     growthRate?: number
     id?: number
+    alias?: null | string
+    famiy?: null | string
+    cooldown?: number[]
+}
+
+export interface characterDetail {
+    id?: number
+    captain?: string
+    special?: string
+    sailor?: string
+    sailorNotes?: string
+    specialName?: string
+    limit?: any
+    potential?: any
+    potentialNotes?: any
+    support?: any
+    evolution?: number[] | number
+    evolvers?: number[]
 }
