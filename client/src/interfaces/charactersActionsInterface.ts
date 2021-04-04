@@ -1,16 +1,13 @@
 import { characterInterface } from './stateInterfaces'
 import actionTypes from '../redux/actions/actionTypes'
 
-type loadOneCharacterAction = {
+export type loadOneCharacterAction = {
     type: typeof actionTypes.LOAD_ONE_CHARACTER
     query: number
 }
 
-type loadAllCharactersAction = {
+export type loadAllCharactersAction = {
     type: typeof actionTypes.LOAD_ALL_CHARACTERS
-    data: characterInterface
+    data: characterInterface[]
 }
 
-export type CharactersActionsTypes =
-    loadOneCharacterAction |
-    loadAllCharactersAction
