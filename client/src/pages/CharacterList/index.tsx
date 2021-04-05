@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import ReactPaginate from "react-paginate";
 import Character from "./CharacterRow";
 
@@ -7,15 +7,23 @@ import { bindActionCreators } from "redux";
 import {
   loadAllCharacters,
   loadCharsShown,
+  filterCharacters,
 } from "../../redux/actions/charactersActions";
 
-export function CharacterList({ actions, characters, charsShown }) {
+import "../../styles/CharacterList.scss";
+
+export function CharacterList({
+  actions,
+  characters,
+  charsShown,
+  charactersFiltered,
+}) {
   const [pagination, setPagination] = useState(1);
   const charsPerPage = 20;
 
   useEffect(() => {
     actions.loadCharsShown(pagination, charsPerPage);
-  }, [actions, characters, pagination]);
+  }, [actions, charactersFiltered, pagination]);
 
   useEffect(() => {
     if (!characters?.length) {
@@ -23,12 +31,53 @@ export function CharacterList({ actions, characters, charsShown }) {
     }
   }, [actions, characters]);
 
+  const [isSticky, setSticky] = useState(false);
+  const ref = useRef(null);
+  const handleScroll = () => {
+    if (ref.current) {
+      setSticky(ref.current.getBoundingClientRect().top <= 0);
+    }
+  };
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", () => handleScroll);
+    };
+  }, []);
+
   return (
-    <>
-      {charsShown.length && charsShown.map((unit) => <Character unit={unit} />)}
+    <div className="charlist">
+      <div className={`charlist__header${isSticky ? " sticky" : ""}`} ref={ref}>
+        PRUEBAAAAAAAAAAAA
+      </div>
+      <button
+        type="button"
+        onClick={() =>
+          actions.filterCharacters({ key: "class", value: "Cerebral" })
+        }
+      >
+        CEREBRAL
+      </button>
+      <button
+        type="button"
+        onClick={() =>
+          actions.filterCharacters({ key: "class", value: "Slasher" })
+        }
+      >
+        SLASHER
+      </button>
+      <button
+        type="button"
+        onClick={() => actions.filterCharacters({ key: "type", value: "DEX" })}
+      >
+        DEX
+      </button>
+      {charsShown.length &&
+        charsShown.map((unit) => <Character unit={unit} key={Math.random()} />)}
 
       <ReactPaginate
-        pageCount={Math.ceil(characters.length / charsPerPage)}
+        pageCount={Math.ceil(charactersFiltered.length / charsPerPage)}
         marginPagesDisplayed={2}
         pageRangeDisplayed={5}
         initialPage={0}
@@ -45,7 +94,7 @@ export function CharacterList({ actions, characters, charsShown }) {
           setPagination(selected);
         }}
       />
-    </>
+    </div>
   );
 }
 
@@ -53,6 +102,7 @@ export function mapStateToProps(state) {
   return {
     characters: state.charactersReducer.characters,
     charsShown: state.charactersReducer.charsShown,
+    charactersFiltered: state.charactersReducer.charactersFiltered,
   };
 }
 export function mapDispatchToProps(dispatch) {
@@ -61,6 +111,7 @@ export function mapDispatchToProps(dispatch) {
       {
         loadAllCharacters,
         loadCharsShown,
+        filterCharacters,
       },
       dispatch
     ),
