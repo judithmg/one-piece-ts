@@ -33,3 +33,11 @@ export function loadCharsShown(page: number, charsPerPage: number) {
     };
 }
 
+export function filterCharacters(filter: object) {
+    console.log(filter)
+    return {
+        type: actionTypes.FILTER_CHARACTER,
+        filter
+    }
+}
+

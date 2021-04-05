@@ -51,10 +51,10 @@ describe('Given a CharacterRow component', () => {
             const div = document.querySelector('div')
             expect(div).toBeTruthy()
         })
-        test('Then there should be a div with a text id "3383"', () => {
+        test('Then there should be a div with a text maxHP "1645"', () => {
             
-            const {innerHTML} = document.querySelector('.unit-id')
-            expect(innerHTML).toBe('3383')
+            const {innerHTML} = document.querySelector('.unit-maxHP')
+            expect(innerHTML).toBe('1645')
         })
     })
 })
