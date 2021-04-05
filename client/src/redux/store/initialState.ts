@@ -1,9 +1,11 @@
 const initialState = {
     charactersReducer: {
         characters: [],
+        charactersFiltered: [],
         character: {},
         charsShown: [],
-        charDetail: {}
+        charDetail: {},
+        filters: []
     }
 };
 export default initialState

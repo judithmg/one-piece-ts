@@ -5,18 +5,21 @@ import { characterInterface, characterDetail } from '../../interfaces/stateInter
 
 export interface charactersState {
     characters?: characterInterface[]
+    charactersFiltered?: characterInterface[]
     character?: characterInterface | null
     charsShown?: characterInterface[]
     charDetail?: characterDetail
+    filters: any[]
 }
 
 
 
 export default function charactersReducer(state: charactersState = initialState.charactersReducer, action: AnyAction): charactersState {
     let foundCharacter
+    let tempFilters: any[]
     switch (action.type) {
         case actionTypes.LOAD_ALL_CHARACTERS:
-            return { ...state, characters: action.data }
+            return { ...state, characters: action.data, charactersFiltered: action.data }
 
         case actionTypes.LOAD_ONE_CHARACTER:
             foundCharacter = state?.characters?.find((char) => char.id === action.query)
@@ -25,7 +28,7 @@ export default function charactersReducer(state: charactersState = initialState.
         case actionTypes.LOAD_CHARS_SHOWN:
             return {
                 ...state,
-                charsShown: state?.characters?.slice((action.page) * action.charsPerPage, (action.page + 1) * action.charsPerPage),
+                charsShown: state?.charactersFiltered?.slice((action.page) * action.charsPerPage, (action.page + 1) * action.charsPerPage),
             };
 
         case actionTypes.LOAD_CHARACTER_DETAIL:
@@ -34,6 +37,16 @@ export default function charactersReducer(state: charactersState = initialState.
                 ...state,
                 charDetail: foundCharacter
             }
+
+        case actionTypes.FILTER_CHARACTER:
+            tempFilters = [...state.filters, action.filter];
+            let result = state?.charactersFiltered?.filter((unit: any) => tempFilters?.every((filter: any) => unit[filter.key] === filter.value || unit[filter.key].includes(filter.value)))
+            return {
+                ...state,
+                charactersFiltered: result,
+                filters: [...state.filters, action.filter]
+            }
+
         default:
             return state
     }
