@@ -63946,7 +63946,7 @@
     "growthRate": 1,
     "id": 2894,
     "alias": "ミホーク＆ペローナ シッケアール王国跡地の住人達",
-    "family": ["Mihawk", "Perona"],
+    "family": ["Dracule Mihawk", "Perona"],
     "cooldown": [19, 14]
   },
   {
@@ -63972,7 +63972,7 @@
     "growthRate": 1,
     "id": 2895,
     "alias": "ミホーク＆ペローナ シッケアール王国跡地の強者達",
-    "family": ["Mihawk", "Perona"],
+    "family": ["Dracule Mihawk", "Perona"],
     "cooldown": [19, 14]
   },
   {
