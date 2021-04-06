@@ -34,10 +34,21 @@ export function loadCharsShown(page: number, charsPerPage: number) {
 }
 
 export function filterCharacters(filter: object) {
-    console.log(filter)
     return {
         type: actionTypes.FILTER_CHARACTER,
         filter
     }
 }
 
+export function clearFilters() {
+    return {
+        type: actionTypes.CLEAR_FILTERS
+    }
+}
+
+export function costFilter(filter: number[]) {
+    return {
+        type: actionTypes.COST_FILTER,
+        filter
+    }
+}

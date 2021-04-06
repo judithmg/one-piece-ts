@@ -10,6 +10,7 @@ export interface charactersState {
     charsShown?: characterInterface[]
     charDetail?: characterDetail
     filters: any[]
+    costFilter?: number[]
 }
 
 
@@ -17,6 +18,7 @@ export interface charactersState {
 export default function charactersReducer(state: charactersState = initialState.charactersReducer, action: AnyAction): charactersState {
     let foundCharacter
     let tempFilters: any[]
+    let result
     switch (action.type) {
         case actionTypes.LOAD_ALL_CHARACTERS:
             return { ...state, characters: action.data, charactersFiltered: action.data }
@@ -40,11 +42,31 @@ export default function charactersReducer(state: charactersState = initialState.
 
         case actionTypes.FILTER_CHARACTER:
             tempFilters = [...state.filters, action.filter];
-            let result = state?.charactersFiltered?.filter((unit: any) => tempFilters?.every((filter: any) => unit[filter.key] === filter.value || unit[filter.key].includes(filter.value)))
+            if (action.filter.key !== 'stars' && action.filter.key !== 'combo') {
+                result = state?.charactersFiltered?.filter((unit: any) => tempFilters?.every((filter: any) => unit[filter.key] === filter.value || unit[filter.key].includes(filter.value)))
+            } else {
+                result = state?.charactersFiltered?.filter((unit: any) => tempFilters?.every((filter: any) => unit[filter.key] === filter.value))
+            }
             return {
                 ...state,
                 charactersFiltered: result,
                 filters: [...state.filters, action.filter]
+            }
+
+        case actionTypes.COST_FILTER:
+            result = state?.characters?.filter((unit: any) => unit.cost > action.filter[0] && unit.cost < action.filter[1])
+            return {
+                ...state,
+                charactersFiltered: result,
+                costFilter: action.filter
+            }
+
+        case actionTypes.CLEAR_FILTERS:
+            return {
+                ...state,
+                filters: [],
+                costFilter: [0, 99],
+                charactersFiltered: state.characters
             }
 
         default:
