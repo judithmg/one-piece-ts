@@ -63,6 +63,13 @@
       .unit-id {
         font-weight: 500;
       }
+
+      .unit-stars {
+        span {
+          color: red;
+          font-size: 15px;
+        }
+      }
     }
     .row__class {
       @include flex(column, space-around, space-around);
