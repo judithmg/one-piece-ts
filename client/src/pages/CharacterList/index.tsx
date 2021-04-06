@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import Character from "./CharacterRow";
-
+import CharacterHeader from "./CharacterHeader";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
@@ -31,26 +31,9 @@ export function CharacterList({
     }
   }, [actions, characters]);
 
-  const [isSticky, setSticky] = useState(false);
-  const ref = useRef(null);
-  const handleScroll = () => {
-    if (ref.current) {
-      setSticky(ref.current.getBoundingClientRect().top <= 0);
-    }
-  };
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", () => handleScroll);
-    };
-  }, []);
-
   return (
     <div className="charlist">
-      <div className={`charlist__header${isSticky ? " sticky" : ""}`} ref={ref}>
-        PRUEBAAAAAAAAAAAA
-      </div>
+      <CharacterHeader />
       <button
         type="button"
         onClick={() =>
@@ -69,9 +52,25 @@ export function CharacterList({
       </button>
       <button
         type="button"
-        onClick={() => actions.filterCharacters({ key: "type", value: "DEX" })}
+        onClick={() =>
+          actions.filterCharacters({ key: "class", value: "Powerhouse" })
+        }
       >
-        DEX
+        POWERHOUSE
+      </button>
+      <button
+        type="button"
+        onClick={() =>
+          actions.filterCharacters({ key: "class", value: "Driven" })
+        }
+      >
+        Driven
+      </button>
+      <button
+        type="button"
+        onClick={() => actions.filterCharacters({ key: "type", value: "INT" })}
+      >
+        INT
       </button>
       {charsShown.length &&
         charsShown.map((unit) => <Character unit={unit} key={Math.random()} />)}
@@ -81,14 +80,15 @@ export function CharacterList({
         marginPagesDisplayed={2}
         pageRangeDisplayed={5}
         initialPage={0}
-        previousLabel="previous"
-        nextLabel="next"
+        previousLabel="Previous"
+        nextLabel="Next"
         breakLabel="..."
+        breakLinkClassName="charlist__pagination-break"
         containerClassName="charlist__pagination"
         pageClassName="charlist__pagination-page"
         activeClassName="charlist__pagination-active"
         nextLinkClassName="charlist__pagination-next"
-        previosLinkClassName="charlist__pagination-previous"
+        previousLinkClassName="charlist__pagination-previous"
         onPageChange={({ selected }) => {
           window.scrollTo({ top: 0, behavior: "smooth" });
           setPagination(selected);

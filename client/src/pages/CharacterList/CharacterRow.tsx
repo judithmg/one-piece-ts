@@ -1,6 +1,7 @@
 import React from "react";
 import getThumbnailUrl from "../../utils/getThumbnailUrl";
 import { Link } from "react-router-dom";
+import StarRatings from "./StarRatings";
 import "../../styles/CharacterRow.scss";
 
 export default function CharacterRow({ unit }) {
@@ -40,7 +41,7 @@ export default function CharacterRow({ unit }) {
           <span className="unit-maxATK">{unit.maxATK}</span>
           <span className="unit-maxRCV">{unit.maxRCV}</span>
           <span className="unit-cost">{unit.cost}</span>
-          <span className="unit-stars">{unit.stars}</span>
+          <StarRatings stars={unit.stars} />
         </div>
         <div className="row__class">
           {unit.class && unit?.class?.length === 2 ? (
