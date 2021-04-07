@@ -1,0 +1,50 @@
+@import "./mixins";
+@import "./colors";
+@import "./fonts";
+
+.charfilters {
+  max-width: 30vw;
+}
+
+.btn-filter-stars {
+  .unit-stars {
+    .star-ratings {
+      opacity: 70%;
+      &:hover {
+        opacity: 100%;
+      }
+    }
+  }
+}
+.btn-filter {
+  cursor: pointer;
+  opacity: 70%;
+  &:hover {
+    opacity: 100%;
+  }
+}
+
+.btn-filter-class {
+  padding: 0;
+  background-color: transparent;
+}
+.btn-filter-type {
+  color: $white;
+  width: 100%;
+}
+
+button.str {
+  background-color: $strcolor;
+}
+button.dex {
+  background-color: $dexcolor;
+}
+button.qck {
+  background-color: $qckcolor;
+}
+button.psy {
+  background-color: $psycolor;
+}
+button.int {
+  background-color: $intcolor;
+}

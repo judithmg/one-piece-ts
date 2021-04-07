@@ -1,5 +1,6 @@
 @import "./colors";
 @import "./fonts";
+@import "./mixins";
 
 body {
   background-color: $bgcolor;
@@ -10,4 +11,15 @@ li {
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+button {
+  font-family: $Montserrat;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+}
+
+main {
+  @include flex(row, center, flex-start);
 }

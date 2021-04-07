@@ -2,10 +2,6 @@
 @import "./colors";
 @import "./fonts";
 
-main {
-  @include flex(row, center, flex-start);
-}
-
 .sticky {
   position: sticky;
   top: 0;
