@@ -7,7 +7,6 @@ import { bindActionCreators } from "redux";
 import {
   loadAllCharacters,
   loadCharsShown,
-  filterCharacters,
 } from "../../redux/actions/charactersActions";
 
 import "../../styles/CharacterList.scss";
@@ -17,13 +16,18 @@ export function CharacterList({
   characters,
   charsShown,
   charactersFiltered,
+  filters,
 }) {
   const [pagination, setPagination] = useState(1);
   const charsPerPage = 20;
 
   useEffect(() => {
     actions.loadCharsShown(pagination, charsPerPage);
-  }, [actions, charactersFiltered, pagination]);
+  }, [actions, charactersFiltered, pagination, filters]);
+
+  useEffect(() => {
+    setPagination(0);
+  }, [filters]);
 
   useEffect(() => {
     if (!characters?.length) {
@@ -32,46 +36,8 @@ export function CharacterList({
   }, [actions, characters]);
 
   return (
-    <div className="charlist">
+    <article className="charlist">
       <CharacterHeader />
-      <button
-        type="button"
-        onClick={() =>
-          actions.filterCharacters({ key: "class", value: "Cerebral" })
-        }
-      >
-        CEREBRAL
-      </button>
-      <button
-        type="button"
-        onClick={() =>
-          actions.filterCharacters({ key: "class", value: "Slasher" })
-        }
-      >
-        SLASHER
-      </button>
-      <button
-        type="button"
-        onClick={() =>
-          actions.filterCharacters({ key: "class", value: "Powerhouse" })
-        }
-      >
-        POWERHOUSE
-      </button>
-      <button
-        type="button"
-        onClick={() =>
-          actions.filterCharacters({ key: "class", value: "Driven" })
-        }
-      >
-        Driven
-      </button>
-      <button
-        type="button"
-        onClick={() => actions.filterCharacters({ key: "type", value: "INT" })}
-      >
-        INT
-      </button>
       {charsShown.length &&
         charsShown.map((unit) => <Character unit={unit} key={Math.random()} />)}
 
@@ -94,7 +60,7 @@ export function CharacterList({
           setPagination(selected);
         }}
       />
-    </div>
+    </article>
   );
 }
 
@@ -103,6 +69,7 @@ export function mapStateToProps(state) {
     characters: state.charactersReducer.characters,
     charsShown: state.charactersReducer.charsShown,
     charactersFiltered: state.charactersReducer.charactersFiltered,
+    filters: state.charactersReducer.filters,
   };
 }
 export function mapDispatchToProps(dispatch) {
@@ -111,7 +78,6 @@ export function mapDispatchToProps(dispatch) {
       {
         loadAllCharacters,
         loadCharsShown,
-        filterCharacters,
       },
       dispatch
     ),

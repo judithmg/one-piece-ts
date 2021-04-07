@@ -10,8 +10,8 @@ export default function StarRatingsComp({ stars }) {
         starRatedColor="red"
         numberOfStars={6}
         name="rating"
-        starDimension={13}
-        starSpacing={1}
+        starDimension={"13"}
+        starSpacing={"1"}
       />
       {isNaN(stars) ? <span>+</span> : ""}
     </div>
