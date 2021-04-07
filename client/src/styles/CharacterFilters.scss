@@ -3,7 +3,15 @@
 @import "./fonts";
 
 .charfilters {
-  max-width: 30vw;
+  margin-left: 10px;
+  max-width: 25vw;
+  padding: 10px;
+  position: fixed;
+  overflow-y: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  overflow-x: hidden;
 }
 
 .btn-filter-stars {
@@ -23,7 +31,21 @@
     opacity: 100%;
   }
 }
-
+.--applied {
+  opacity: 100%;
+}
+.btn-clear {
+  width: 100%;
+  color: $white;
+  padding: 5px;
+  background-color: $black;
+}
+.btn-filter-combo {
+  width: 20px;
+  margin: 0 10px;
+  color: $white;
+  background-color: $black;
+}
 .btn-filter-class {
   padding: 0;
   background-color: transparent;
