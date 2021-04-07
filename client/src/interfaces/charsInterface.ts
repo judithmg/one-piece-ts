@@ -1,6 +1,6 @@
 export interface characterInterface {
     name?: string
-    type?: string
+    type?: string | string[]
     class?: any
     stars?: number
     cost?: number
