@@ -8,8 +8,19 @@ import {
   loadAllCharacters,
   loadCharsShown,
 } from "../../redux/actions/charactersActions";
-
 import "../../styles/CharacterList.scss";
+
+import { characterInterface } from "../../interfaces/charsInterface";
+export interface compInterface {
+  characters: characterInterface[];
+  charsShown: characterInterface[];
+  charactersFiltered: characterInterface[];
+  actions: {
+    loadAllCharacters: Function;
+    loadCharsShown: Function;
+  };
+  filters: any;
+}
 
 export function CharacterList({
   actions,
@@ -17,7 +28,7 @@ export function CharacterList({
   charsShown,
   charactersFiltered,
   filters,
-}) {
+}: compInterface) {
   const [pagination, setPagination] = useState(1);
   const charsPerPage = 20;
 
@@ -30,7 +41,7 @@ export function CharacterList({
   }, [filters]);
 
   useEffect(() => {
-    if (!characters?.length) {
+    if (!characters.length) {
       actions.loadAllCharacters();
     }
   }, [actions, characters]);
@@ -38,8 +49,7 @@ export function CharacterList({
   return (
     <article className="charlist">
       <CharacterHeader />
-      {charsShown.length &&
-        charsShown.map((unit) => <Character unit={unit} key={Math.random()} />)}
+      {charsShown.length && charsShown.map((unit) => <Character unit={unit} />)}
 
       <ReactPaginate
         pageCount={Math.ceil(charactersFiltered.length / charsPerPage)}
@@ -64,7 +74,7 @@ export function CharacterList({
   );
 }
 
-export function mapStateToProps(state) {
+export function mapStateToProps(state: any) {
   return {
     characters: state.charactersReducer.characters,
     charsShown: state.charactersReducer.charsShown,
@@ -72,7 +82,7 @@ export function mapStateToProps(state) {
     filters: state.charactersReducer.filters,
   };
 }
-export function mapDispatchToProps(dispatch) {
+export function mapDispatchToProps(dispatch: any) {
   return {
     actions: bindActionCreators(
       {

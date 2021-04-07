@@ -1,12 +1,16 @@
 import React from "react";
 import getThumbnailUrl from "../../utils/getThumbnailUrl";
 import { Link } from "react-router-dom";
-import StarRatings from "./StarRatings";
+import StarRatings from "../shared/StarRatings";
 import "../../styles/CharacterRow.scss";
+import { characterInterface } from "../../interfaces/charsInterface";
+export interface compInterface {
+  unit: characterInterface;
+}
 
-export default function CharacterRow({ unit }) {
+export default function CharacterRow({ unit }: compInterface) {
   return (
-    <div className="row__container">
+    <div className="row__container" key={Math.random()}>
       <div className="row__left">
         <div className="row__img">
           <Link to={`/${unit.id}`}>
@@ -15,12 +19,10 @@ export default function CharacterRow({ unit }) {
         </div>
         <div className="row__names">
           {unit?.type?.length !== 2 && (
-            <span className={`${unit.type.toLowerCase()}color unit-name`}>
-              {unit.name}
-            </span>
+            <span className={`${unit.type!}color unit-name`}>{unit.name}</span>
           )}
           {unit?.type?.length === 2 && (
-            <span className={`${unit.type[0].toLowerCase()}color unit-name`}>
+            <span className={`${unit.type[0]}color unit-name`}>
               {unit.name}
             </span>
           )}

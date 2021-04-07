@@ -3,7 +3,7 @@ import "../../styles/CharacterHeader.scss";
 
 export default function CharacterHeader() {
   const [isSticky, setSticky] = useState(false);
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
   const handleScroll = () => {
     if (ref.current) {
       setSticky(ref.current.getBoundingClientRect().top <= 0);

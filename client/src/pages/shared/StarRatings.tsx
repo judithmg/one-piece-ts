@@ -1,7 +1,7 @@
 import React from "react";
 import StarRatings from "react-star-ratings";
 
-export default function StarRatingsComp({ stars }) {
+export default function StarRatingsComp({ stars }: any) {
   const numStars: number = parseInt(stars);
   return (
     <div className="unit-stars">

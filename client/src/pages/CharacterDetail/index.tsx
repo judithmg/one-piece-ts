@@ -9,7 +9,7 @@ import {
 } from "../../redux/actions/charactersActions";
 
 export function CharacterDetail({ actions, character, charDetail }) {
-  const { charId } = useParams();
+  const { charId } = useParams<{ charId: string }>();
 
   useEffect(() => {
     actions.loadOneCharacter(+charId);
