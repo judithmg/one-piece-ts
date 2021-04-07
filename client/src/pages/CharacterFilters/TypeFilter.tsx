@@ -3,14 +3,18 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { filterCharacters } from "../../redux/actions/charactersActions";
 import filtersArr from "../../constants/filters";
+import "../../styles/CharacterFilters.scss";
 
 export function CharacterFilters({ actions, filters }) {
   return (
     <div className="charfilters__type">
+      <h2>Type filters</h2>
       {filtersArr.type.map((type) => (
         <button
           type="button"
           onClick={() => actions.filterCharacters({ key: "type", value: type })}
+          className={`btn-filter btn-filter-type ${type.toLowerCase()}`}
+          key={Math.random()}
         >
           {type}
         </button>

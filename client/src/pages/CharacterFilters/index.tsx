@@ -15,8 +15,8 @@ export function CharacterFilters({ actions, filters }) {
   return (
     <article className="charfilters">
       <TypeFilter />
-      <StarsFilter />
       <ClassFilter />
+      <StarsFilter />
       <ComboFilter />
       <CostFilter />
 

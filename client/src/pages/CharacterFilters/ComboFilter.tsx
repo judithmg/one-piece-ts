@@ -7,12 +7,16 @@ import filtersArr from "../../constants/filters";
 export function CharacterFilters({ actions, filters }) {
   return (
     <div className="charfilters__combo">
+      <h2>Combo filters</h2>
+
       {filtersArr.combo.map((combo) => (
         <button
           type="button"
           onClick={() =>
             actions.filterCharacters({ key: "combo", value: combo })
           }
+          className={`btn-filter btn-filter-combo`}
+          key={Math.random()}
         >
           {combo}
         </button>

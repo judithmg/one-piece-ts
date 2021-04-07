@@ -7,14 +7,18 @@ import filtersArr from "../../constants/filters";
 export function CharacterFilters({ actions, filters }) {
   return (
     <div className="charfilters__stars">
+      <h2>Class filters</h2>
+
       {filtersArr.class.map((classN) => (
         <button
           type="button"
           onClick={() =>
             actions.filterCharacters({ key: "class", value: classN })
           }
+          key={Math.random()}
+          className={`btn-filter btn-filter-class ${classN.toLowerCase()}`}
         >
-          {classN}
+          <img src={`images/${classN.toLowerCase()}.png`} alt="class" />
         </button>
       ))}
     </div>

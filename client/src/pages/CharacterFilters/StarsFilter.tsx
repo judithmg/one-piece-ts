@@ -3,18 +3,23 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { filterCharacters } from "../../redux/actions/charactersActions";
 import filtersArr from "../../constants/filters";
+import StarRatings from "../CharacterList/StarRatings";
 
 export function CharacterFilters({ actions, filters }) {
   return (
     <div className="charfilters__stars">
+      <h2>Rarity filters</h2>
+
       {filtersArr.stars.map((stars) => (
         <button
           type="button"
           onClick={() =>
             actions.filterCharacters({ key: "stars", value: stars })
           }
+          className={`btn-filter btn-filter-stars`}
+          key={Math.random()}
         >
-          {stars}
+          <StarRatings stars={stars} />
         </button>
       ))}
     </div>

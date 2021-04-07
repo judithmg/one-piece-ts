@@ -17,6 +17,7 @@ export function CharacterFilters({ actions }) {
 
   return (
     <div className="charfilters__stars">
+      <h2>Cost filters</h2>
       <Slider
         value={value}
         onChange={handleChange}
