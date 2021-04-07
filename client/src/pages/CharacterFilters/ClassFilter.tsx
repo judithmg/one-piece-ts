@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { filterCharacters } from "../../redux/actions/charactersActions";
@@ -7,17 +8,34 @@ export interface actionsInterface {
   actions: { filterCharacters: Function };
 }
 export function CharacterFilters({ actions }: actionsInterface) {
+  const [opacity, setOpacity] = useState([
+    "70%",
+    "70%",
+    "70%",
+    "70%",
+    "70%",
+    "70%",
+  ]);
+
+  const handleClick = (classN, index) => {
+    actions.filterCharacters({ key: "class", value: classN });
+    const newOpacity = [...opacity];
+    console.log(opacity[index]);
+    opacity[index] === "70%" || opacity[index] === null
+      ? (newOpacity[index] = "100%")
+      : (newOpacity[index] = "70%");
+    setOpacity(newOpacity);
+  };
   return (
     <div className="charfilters__stars">
       <h2>Class filters</h2>
 
-      {filtersArr.class.map((classN) => (
+      {filtersArr.class.map((classN, index) => (
         <button
           type="button"
-          onClick={() =>
-            actions.filterCharacters({ key: "class", value: classN })
-          }
+          onClick={() => handleClick(classN, index)}
           key={Math.random()}
+          style={{ opacity: opacity[index] }}
           className={`btn-filter btn-filter-class ${classN.toLowerCase()}`}
         >
           <img src={`images/${classN.toLowerCase()}.png`} alt="class" />

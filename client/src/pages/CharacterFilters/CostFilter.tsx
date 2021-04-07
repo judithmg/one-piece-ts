@@ -23,6 +23,8 @@ export function CharacterFilters({ actions }: actionsInterface) {
       <h2>Cost filters</h2>
       <Slider
         value={value}
+        min={1}
+        max={99}
         onChange={handleChange}
         valueLabelDisplay="auto"
         aria-labelledby="range-slider"
