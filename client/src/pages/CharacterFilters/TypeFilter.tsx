@@ -4,8 +4,11 @@ import { bindActionCreators } from "redux";
 import { filterCharacters } from "../../redux/actions/charactersActions";
 import filtersArr from "../../constants/filters";
 import "../../styles/CharacterFilters.scss";
+export interface actionsInterface {
+  actions: { filterCharacters: Function };
+}
 
-export function CharacterFilters({ actions, filters }) {
+export function CharacterFilters({ actions }: actionsInterface) {
   return (
     <div className="charfilters__type">
       <h2>Type filters</h2>

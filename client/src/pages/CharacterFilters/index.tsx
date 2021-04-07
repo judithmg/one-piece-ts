@@ -5,13 +5,21 @@ import {
   filterCharacters,
   clearFilters,
 } from "../../redux/actions/charactersActions";
+
 import TypeFilter from "./TypeFilter";
 import StarsFilter from "./StarsFilter";
 import ClassFilter from "./ClassFilter";
 import ComboFilter from "./ComboFilter";
 import CostFilter from "./CostFilter";
 
-export function CharacterFilters({ actions, filters }) {
+export interface compInterface {
+  actions: {
+    filterCharacters: Function;
+    clearFilters: Function;
+  };
+}
+
+export function CharacterFilters({ actions }: compInterface) {
   return (
     <article className="charfilters">
       <TypeFilter />

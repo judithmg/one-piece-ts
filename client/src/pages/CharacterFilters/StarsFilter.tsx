@@ -3,9 +3,12 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { filterCharacters } from "../../redux/actions/charactersActions";
 import filtersArr from "../../constants/filters";
-import StarRatings from "../CharacterList/StarRatings";
+import StarRatings from "../shared/StarRatings";
 
-export function CharacterFilters({ actions, filters }) {
+export interface actionsInterface {
+  actions: { filterCharacters: Function };
+}
+export function CharacterFilters({ actions }: actionsInterface) {
   return (
     <div className="charfilters__stars">
       <h2>Rarity filters</h2>

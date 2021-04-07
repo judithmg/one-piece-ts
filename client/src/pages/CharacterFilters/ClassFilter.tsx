@@ -3,8 +3,10 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { filterCharacters } from "../../redux/actions/charactersActions";
 import filtersArr from "../../constants/filters";
-
-export function CharacterFilters({ actions, filters }) {
+export interface actionsInterface {
+  actions: { filterCharacters: Function };
+}
+export function CharacterFilters({ actions }: actionsInterface) {
   return (
     <div className="charfilters__stars">
       <h2>Class filters</h2>
