@@ -2,14 +2,14 @@ import actionTypes from './actionTypes'
 import units from '../../data/updatedUnits.json'
 import detail from '../../data/details.json'
 
-export function loadOneCharacter(query: number) {
+function loadOneCharacter(query: number) {
     return {
         type: actionTypes.LOAD_ONE_CHARACTER,
         query
     }
 }
 
-export function loadCharacterDetail(query: number) {
+function loadCharacterDetail(query: number) {
 
     return {
         type: actionTypes.LOAD_CHARACTER_DETAIL,
@@ -18,14 +18,14 @@ export function loadCharacterDetail(query: number) {
     }
 }
 
-export function loadAllCharacters() {
+function loadAllCharacters() {
     return {
         type: actionTypes.LOAD_ALL_CHARACTERS,
         data: units
     }
 }
 
-export function loadCharsShown(page: number, charsPerPage: number) {
+function loadCharsShown(page: number, charsPerPage: number) {
     return {
         type: actionTypes.LOAD_CHARS_SHOWN,
         page,
@@ -33,22 +33,32 @@ export function loadCharsShown(page: number, charsPerPage: number) {
     };
 }
 
-export function filterCharacters(filter: object) {
+function filterCharacters(filter: object) {
     return {
         type: actionTypes.FILTER_CHARACTER,
         filter
     }
 }
 
-export function clearFilters() {
+function clearFilters() {
     return {
         type: actionTypes.CLEAR_FILTERS
     }
 }
 
-export function costFilter(filter: number[]) {
+function costFilter(filter: number[]) {
     return {
         type: actionTypes.COST_FILTER,
         filter
     }
+}
+
+export {
+    loadOneCharacter,
+    loadCharacterDetail,
+    loadAllCharacters,
+    loadCharsShown,
+    filterCharacters,
+    clearFilters,
+    costFilter,
 }

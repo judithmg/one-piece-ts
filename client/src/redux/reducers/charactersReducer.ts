@@ -1,7 +1,7 @@
 import actionTypes from '../actions/actionTypes'
 import { AnyAction } from 'redux'
 import initialState from '../store/initialState'
-import { characterInterface, characterDetail } from '../../interfaces/stateInterfaces'
+import { characterInterface, characterDetail } from '../../interfaces/charsInterface'
 
 export interface charactersState {
     characters?: characterInterface[]
