@@ -23,5 +23,5 @@
   },
   "include": [
     "./src/**/*.ts"
-  ]
+, "src/__tests__/CharacterRow.js", "src/__tests__/CharacterList.js"  ]
 }
