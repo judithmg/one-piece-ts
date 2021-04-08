@@ -49,7 +49,8 @@ export function CharacterList({
   return (
     <article className="charlist">
       <CharacterHeader />
-      {charsShown.length && charsShown.map((unit) => <Character unit={unit} />)}
+      {charsShown.length &&
+        charsShown.map((unit) => <Character unit={unit} key={Math.random()} />)}
 
       <ReactPaginate
         pageCount={Math.ceil(charactersFiltered.length / charsPerPage)}
