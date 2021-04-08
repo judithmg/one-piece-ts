@@ -17,15 +17,19 @@ export interface characterInterface {
     growthRate?: number
     id?: number
     alias?: null | string
-    famiy?: null | string
+    family?: null | string
     cooldown?: number[]
 }
 
 export interface characterDetail {
     id?: number
-    captain?: string
-    special?: string
-    sailor?: string
+    captain?: string | {
+        character1: string
+        character2: string
+        combined: string
+    }
+    special?: string | any
+    sailor?: any
     sailorNotes?: string
     specialName?: string
     limit?: any
@@ -34,4 +38,24 @@ export interface characterDetail {
     support?: any
     evolution?: number[] | number
     evolvers?: number[]
+    swap?: string
+    festAbility?: {
+        description: string
+    }[]
+    festSpecial?: {
+        description: string
+        cooldown: number
+    }[]
+    festResistance?: string
+    festAttackTarget?: string
+
+    superSpecial?: string
+    superSpecialCriteria?: string
+    superSpecialNotes?: string
+    VSCondition?: string
+    VSSpecial?: {
+        character1?: string
+        character2?: string
+    }
+    festResilienc?: string
 }
