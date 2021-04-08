@@ -49,7 +49,7 @@ export function CharacterList({
   return (
     <article className="charlist">
       <CharacterHeader />
-      {charsShown.length &&
+      {charsShown &&
         charsShown.map((unit) => <Character unit={unit} key={Math.random()} />)}
 
       <ReactPaginate

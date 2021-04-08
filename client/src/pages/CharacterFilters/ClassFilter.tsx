@@ -8,7 +8,7 @@ export interface actionsInterface {
   actions: { filterCharacters: Function };
 }
 export function CharacterFilters({ actions }: actionsInterface) {
-  const [opacity, setOpacity] = useState(["", "", "", "", "", ""]);
+  const [opacity, setOpacity] = useState(["", "", "", "", "", "", ""]);
 
   const handleClick = (classN, index) => {
     actions.filterCharacters({ key: "class", value: classN });
