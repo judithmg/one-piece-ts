@@ -30,6 +30,22 @@ main {
   @include flex(row, flex-end, flex-start);
 }
 
+.STRcolor {
+  color: $strcolor;
+}
+.DEXcolor {
+  color: $dexcolor;
+}
+.QCKcolor {
+  color: $qckcolor;
+}
+.PSYcolor {
+  color: $psycolor;
+}
+.INTcolor {
+  color: $intcolor;
+}
+
 //SCROLLBAR
 
 ::-webkit-scrollbar {
