@@ -10,7 +10,7 @@ export interface compInterface {
 
 export default function CharacterRow({ unit }: compInterface) {
   return (
-    <div className="row__container" key={Math.random()}>
+    <div className="row__container">
       <div className="row__left">
         <div className="row__img">
           <Link to={`/${unit.id}`}>
