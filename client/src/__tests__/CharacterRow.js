@@ -77,7 +77,7 @@ describe("Given a CharacterRow component", () => {
         );
       });
 
-      const char = document.querySelector(".strcolor");
+      const char = document.querySelector(".STRcolor");
       expect(char).toBeTruthy();
     });
     test("Then its name is shown", () => {
@@ -90,7 +90,7 @@ describe("Given a CharacterRow component", () => {
         );
       });
 
-      const { innerHTML } = document.querySelector(".strcolor");
+      const { innerHTML } = document.querySelector(".STRcolor");
       expect(innerHTML).toBe("Makino, Proprietor of a Relaxed Tavern");
     });
   });
