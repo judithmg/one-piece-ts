@@ -8,22 +8,14 @@ export interface actionsInterface {
   actions: { filterCharacters: Function };
 }
 export function CharacterFilters({ actions }: actionsInterface) {
-  const [opacity, setOpacity] = useState([
-    "70%",
-    "70%",
-    "70%",
-    "70%",
-    "70%",
-    "70%",
-  ]);
+  const [opacity, setOpacity] = useState(["", "", "", "", "", ""]);
 
   const handleClick = (classN, index) => {
     actions.filterCharacters({ key: "class", value: classN });
     const newOpacity = [...opacity];
-    console.log(opacity[index]);
-    opacity[index] === "70%" || opacity[index] === null
-      ? (newOpacity[index] = "100%")
-      : (newOpacity[index] = "70%");
+    opacity[index] === "" || opacity[index] === null
+      ? (newOpacity[index] = "--applied")
+      : (newOpacity[index] = "");
     setOpacity(newOpacity);
   };
   return (
@@ -35,8 +27,7 @@ export function CharacterFilters({ actions }: actionsInterface) {
           type="button"
           onClick={() => handleClick(classN, index)}
           key={Math.random()}
-          style={{ opacity: opacity[index] }}
-          className={`btn-filter btn-filter-class ${classN.toLowerCase()}`}
+          className={`btn-filter btn-filter-class ${opacity[index]}`}
         >
           <img src={`images/${classN.toLowerCase()}.png`} alt="class" />
         </button>

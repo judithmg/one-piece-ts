@@ -18,14 +18,18 @@ export default function CharacterRow({ unit }: compInterface) {
           </Link>
         </div>
         <div className="row__names">
-          {unit?.type?.length !== 2 && (
-            <span className={`${unit.type!}color unit-name`}>{unit.name}</span>
-          )}
-          {unit?.type?.length === 2 && (
-            <span className={`${unit.type[0]}color unit-name`}>
-              {unit.name}
-            </span>
-          )}
+          <Link to={`/${unit.id}`}>
+            {unit?.type?.length !== 2 && (
+              <span className={`${unit.type!}color unit-name`}>
+                {unit.name}
+              </span>
+            )}
+            {unit?.type?.length === 2 && (
+              <span className={`${unit.type[0]}color unit-name`}>
+                {unit.name}
+              </span>
+            )}
+          </Link>
           <span className="unit-alias">{unit.alias}</span>
           {unit.class.length === 2 ? (
             <span className="unit-class">
@@ -48,30 +52,18 @@ export default function CharacterRow({ unit }: compInterface) {
         <div className="row__class">
           {unit.class && unit?.class?.length === 2 ? (
             <>
-              <img
-                src={`images/${unit?.class[0].toLowerCase()}.png`}
-                alt="class"
-              />
-              <img
-                src={`images/${unit?.class[1].toLowerCase()}.png`}
-                alt="class"
-              />
+              <img src={`images/${unit?.class[0]}.png`} alt="class" />
+              <img src={`images/${unit?.class[1]}.png`} alt="class" />
             </>
           ) : unit?.class?.length === 3 ? (
             <>
-              <img
-                src={`images/${unit?.class[0][0].toLowerCase()}.png`}
-                alt="class"
-              />
-              <img
-                src={`images/${unit?.class[0][1].toLowerCase()}.png`}
-                alt="class"
-              />
+              <img src={`images/${unit?.class[0][0]}.png`} alt="class" />
+              <img src={`images/${unit?.class[0][1]}.png`} alt="class" />
             </>
           ) : unit.class.toLowerCase() === "booster" ? (
             <img src={`images/evolver.png`} alt="class" />
           ) : (
-            <img src={`images/${unit?.class.toLowerCase()}.png`} alt="class" />
+            <img src={`images/${unit?.class}.png`} alt="class" />
           )}
         </div>
       </div>

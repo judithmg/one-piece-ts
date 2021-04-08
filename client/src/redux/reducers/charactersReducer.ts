@@ -2,7 +2,6 @@ import actionTypes from '../actions/actionTypes'
 import { AnyAction } from 'redux'
 import initialState from '../store/initialState'
 import { characterInterface, characterDetail } from '../../interfaces/charsInterface'
-
 export interface charactersState {
     characters?: characterInterface[]
     charactersFiltered?: characterInterface[]
@@ -19,6 +18,7 @@ export default function charactersReducer(state: charactersState = initialState.
     let foundCharacter
     let tempFilters: any[]
     let result
+    let filters
     switch (action.type) {
         case actionTypes.LOAD_ALL_CHARACTERS:
             return { ...state, characters: action.data, charactersFiltered: action.data }
@@ -41,16 +41,22 @@ export default function charactersReducer(state: charactersState = initialState.
             }
 
         case actionTypes.FILTER_CHARACTER:
-            tempFilters = [...state.filters, action.filter];
-            if (action.filter.key !== 'stars' && action.filter.key !== 'combo') {
-                result = state?.charactersFiltered?.filter((unit: any) => tempFilters?.every((filter: any) => unit[filter.key] === filter.value || unit[filter.key].includes(filter.value)))
+            // check if filter was already applied
+            if (state.filters.filter(e => (e.value === action.filter.value)).length > 0) {
+                tempFilters = state.filters?.filter(e => e.value !== action.filter.value)
             } else {
-                result = state?.charactersFiltered?.filter((unit: any) => tempFilters?.every((filter: any) => unit[filter.key] === filter.value))
+                filters = action.filter
+                tempFilters = [...state.filters, filters];
+            }
+            if (action.filter.key !== 'stars' && action.filter.key !== 'combo') {
+                result = state?.characters?.filter((unit: any) => tempFilters?.every((filter: any) => unit[filter.key] === filter.value || unit[filter.key].includes(filter.value)))
+            } else {
+                result = state?.characters?.filter((unit: any) => tempFilters?.every((filter: any) => unit[filter.key] === filter.value))
             }
             return {
                 ...state,
                 charactersFiltered: result,
-                filters: [...state.filters, action.filter]
+                filters: tempFilters
             }
 
         case actionTypes.COST_FILTER:

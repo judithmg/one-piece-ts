@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { filterCharacters } from "../../redux/actions/charactersActions";
@@ -9,14 +9,26 @@ export interface actionsInterface {
 }
 
 export function CharacterFilters({ actions }: actionsInterface) {
+  const [opacity, setOpacity] = useState(["", "", "", "", "", ""]);
+
+  const handleClick = (type, index) => {
+    actions.filterCharacters({ key: "type", value: type });
+    const newOpacity = [...opacity];
+    opacity[index] === "" || opacity[index] === null
+      ? (newOpacity[index] = "--applied")
+      : (newOpacity[index] = "");
+    setOpacity(newOpacity);
+  };
   return (
     <div className="charfilters__type">
       <h2>Type filters</h2>
-      {filtersArr.type.map((type) => (
+      {filtersArr.type.map((type, index) => (
         <button
           type="button"
-          onClick={() => actions.filterCharacters({ key: "type", value: type })}
-          className={`btn-filter btn-filter-type ${type.toLowerCase()}`}
+          onClick={() => handleClick(type, index)}
+          className={`${type.toLowerCase()} btn-filter btn-filter-type ${
+            opacity[index]
+          }`}
           key={Math.random()}
         >
           {type}

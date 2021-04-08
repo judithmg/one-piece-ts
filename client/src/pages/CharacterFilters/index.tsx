@@ -24,11 +24,15 @@ export function CharacterFilters({ actions }: compInterface) {
     <article className="charfilters">
       <TypeFilter />
       <ClassFilter />
-      <StarsFilter />
       <ComboFilter />
+      <StarsFilter />
       <CostFilter />
 
-      <button type="button" onClick={() => actions.clearFilters()}>
+      <button
+        className="btn-filter btn-clear"
+        type="button"
+        onClick={() => actions.clearFilters()}
+      >
         CLEAR ALL FILTERS
       </button>
     </article>
