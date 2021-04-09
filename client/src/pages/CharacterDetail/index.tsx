@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import "../../styles/CharacterDetail.scss";
 
+import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
@@ -8,13 +9,15 @@ import {
   loadCharacterDetail,
   loadAllCharacters,
 } from "../../redux/actions/charactersActions";
+
 import {
   characterInterface,
   characterDetail,
 } from "../../interfaces/charsInterface";
 
-import "../../styles/CharacterDetail.scss";
 import padNumber from "../../utils/padNumber";
+import urls from "../../constants/dbUrls";
+
 import DetailLB from "./DetailLB";
 import DetailSailor from "./DetailSailor";
 import DetailPotential from "./DetailPotential";
@@ -23,7 +26,7 @@ import DetailStats from "./DetailStats";
 import DetailSpecial from "./DetailSpecial";
 import DetailCaptain from "./DetailCaptain";
 
-export interface compInterface {
+interface Props {
   character: characterInterface;
   charDetail: characterDetail;
   characters: characterInterface[];
@@ -40,7 +43,7 @@ export function CharacterDetail({
   character,
   charDetail,
   characters,
-}: compInterface) {
+}: Props) {
   const { charId } = useParams<{ charId: string }>();
 
   useEffect(() => {
@@ -60,9 +63,7 @@ export function CharacterDetail({
         <div className="chardetail__main">
           <img
             className="chardetail__main-top"
-            src={`https://onepiece-treasurecruise.com/wp-content/uploads/c${padNumber(
-              +character.id
-            )}.png`}
+            src={`${urls.detailImg}${padNumber(+character.id)}.png`}
             alt={`${character.name}`}
           ></img>
           <div className="chardetail__main-bottom">

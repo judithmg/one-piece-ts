@@ -11,7 +11,7 @@ import {
 import "../../styles/CharacterList.scss";
 
 import { characterInterface } from "../../interfaces/charsInterface";
-export interface compInterface {
+interface Props {
   characters: characterInterface[];
   charsShown: characterInterface[];
   charactersFiltered: characterInterface[];
@@ -28,7 +28,7 @@ export function CharacterList({
   charsShown,
   charactersFiltered,
   filters,
-}: compInterface) {
+}: Props) {
   const [pagination, setPagination] = useState(1);
   const charsPerPage = 20;
 

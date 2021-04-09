@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 import StarRatings from "../shared/StarRatings";
 import "../../styles/CharacterRow.scss";
 import { characterInterface } from "../../interfaces/charsInterface";
-export interface compInterface {
+interface Props {
   unit: characterInterface;
 }
 
-export default function CharacterRow({ unit }: compInterface) {
+export default function CharacterRow({ unit }: Props) {
   return (
     <div className="row__container">
       <div className="row__left">
@@ -31,7 +31,7 @@ export default function CharacterRow({ unit }: compInterface) {
             )}
           </Link>
           <span className="unit-alias">{unit.alias}</span>
-          {unit.class.length === 2 ? (
+          {unit?.class?.length === 2 ? (
             <span className="unit-class">
               {unit.class[0]} {unit.class[1]}
             </span>
@@ -60,7 +60,7 @@ export default function CharacterRow({ unit }: compInterface) {
               <img src={`images/${unit?.class[0][0]}.png`} alt="class" />
               <img src={`images/${unit?.class[0][1]}.png`} alt="class" />
             </>
-          ) : unit.class.toLowerCase() === "booster" ? (
+          ) : unit?.class === "Booster" ? (
             <img src={`images/evolver.png`} alt="class" />
           ) : (
             <img src={`images/${unit?.class}.png`} alt="class" />

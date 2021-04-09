@@ -1,14 +1,11 @@
 import React from "react";
 
-export interface specialInterface {
+export interface Props {
   specialName: string;
   special: any;
 }
 
-export default function DetailSpecial({
-  special,
-  specialName,
-}: specialInterface) {
+export default function DetailSpecial({ special, specialName }: Props) {
   return (
     <div className="detail-special">
       {special.description ? (
