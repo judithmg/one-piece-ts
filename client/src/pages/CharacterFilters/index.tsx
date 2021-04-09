@@ -12,14 +12,14 @@ import ClassFilter from "./ClassFilter";
 import ComboFilter from "./ComboFilter";
 import CostFilter from "./CostFilter";
 
-export interface compInterface {
+interface Props {
   actions: {
     filterCharacters: Function;
     clearFilters: Function;
   };
 }
 
-export function CharacterFilters({ actions }: compInterface) {
+export function CharacterFilters({ actions }: Props) {
   return (
     <article className="charfilters">
       <TypeFilter />
