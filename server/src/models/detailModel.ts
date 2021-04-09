@@ -37,4 +37,4 @@ const detailSchema: characterDetail = new Schema({
     festResilienc: String
 })
 
-module.exports = model('Detail', detailSchema);
+module.exports = model('Details', detailSchema);

@@ -24,4 +24,4 @@ const charSchema: characterInterface = new Schema({
     cooldown: [Number],
 })
 
-module.exports = model('Character', charSchema);
+module.exports = model('Characters', charSchema);
