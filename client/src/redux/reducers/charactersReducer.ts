@@ -34,7 +34,7 @@ export default function charactersReducer(state: charactersState = initialState.
             };
 
         case actionTypes.LOAD_CHARACTER_DETAIL:
-            foundCharacter = action?.data?.find((char: any) => +char.id === action.query)
+            foundCharacter = action?.data?.find((char: any) => +char.id === +action.query)
             return {
                 ...state,
                 charDetail: foundCharacter

@@ -1,6 +1,7 @@
 import actionTypes from './actionTypes'
-import units from '../../data/updatedUnits.json'
-import detail from '../../data/details.json'
+import { AppDispatch } from '../store/configureStore'
+import axios from 'axios'
+import dbUrls from '../../constants/dbUrls'
 
 function loadOneCharacter(query: number) {
     return {
@@ -10,18 +11,23 @@ function loadOneCharacter(query: number) {
 }
 
 function loadCharacterDetail(query: number) {
-
-    return {
-        type: actionTypes.LOAD_CHARACTER_DETAIL,
-        query,
-        data: detail
+    return async (dispatch: AppDispatch) => {
+        const { data } = await axios.get(`${dbUrls.base}/details`)
+        dispatch({
+            type: actionTypes.LOAD_CHARACTER_DETAIL,
+            data,
+            query
+        })
     }
 }
 
 function loadAllCharacters() {
-    return {
-        type: actionTypes.LOAD_ALL_CHARACTERS,
-        data: units
+    return async (dispatch: AppDispatch) => {
+        const { data } = await axios.get(`${dbUrls.base}/characters`)
+        dispatch({
+            type: actionTypes.LOAD_ALL_CHARACTERS,
+            data
+        })
     }
 }
 
