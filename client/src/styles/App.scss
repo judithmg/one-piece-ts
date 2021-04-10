@@ -1,7 +1,73 @@
 @import "./colors";
 @import "./fonts";
+@import "./mixins";
 
 body {
   background-color: $bgcolor;
   font-family: $Montserrat;
+  box-sizing: border-box;
+}
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+button {
+  font-family: $Montserrat;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+main {
+  @include flex(row, flex-end, flex-start);
+}
+
+.STRcolor {
+  color: $strcolor;
+}
+.DEXcolor {
+  color: $dexcolor;
+}
+.QCKcolor {
+  color: $qckcolor;
+}
+.PSYcolor {
+  color: $psycolor;
+}
+.INTcolor {
+  color: $intcolor;
+}
+
+//SCROLLBAR
+
+::-webkit-scrollbar {
+  width: 11px;
+  height: 11px;
+}
+::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+::-webkit-scrollbar-thumb {
+  background: $dexcolor;
+  border: 0px none #ffffff;
+  border-radius: 50px;
+}
+
+::-webkit-scrollbar-track {
+  background: $lightgray;
+  border: 0px none #ffffff;
+  border-radius: 0px;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
 }

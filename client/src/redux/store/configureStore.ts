@@ -19,3 +19,6 @@ export default function configureStore() {
 
     );
 }
+
+const store = configureStore()
+export type AppDispatch = typeof store.dispatch

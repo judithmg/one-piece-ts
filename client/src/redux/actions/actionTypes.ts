@@ -4,6 +4,8 @@ interface actionTypesInterface {
     LOAD_CHARS_SHOWN: string
     LOAD_CHARACTER_DETAIL: string
     FILTER_CHARACTER: string
+    CLEAR_FILTERS: string
+    COST_FILTER: string
 }
 
 const actionTypes: actionTypesInterface = {
@@ -11,7 +13,9 @@ const actionTypes: actionTypesInterface = {
     LOAD_ONE_CHARACTER: 'LOAD_ONE_CHARACTER',
     LOAD_CHARS_SHOWN: 'LOAD_CHARS_SHOWN',
     LOAD_CHARACTER_DETAIL: 'LOAD_CHARACTER_DETAIL',
-    FILTER_CHARACTER: 'FILTER_CHARACTER'
+    FILTER_CHARACTER: 'FILTER_CHARACTER',
+    CLEAR_FILTERS: 'CLEAR_FILTERS',
+    COST_FILTER: 'COST_FILTER'
 }
 
 export default actionTypes

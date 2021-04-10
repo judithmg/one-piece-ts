@@ -5,7 +5,8 @@ const initialState = {
         character: {},
         charsShown: [],
         charDetail: {},
-        filters: []
+        filters: [],
+        costFilter: [0, 99]
     }
 };
 export default initialState

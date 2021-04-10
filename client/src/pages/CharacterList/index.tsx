@@ -1,79 +1,55 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import Character from "./CharacterRow";
-
+import CharacterHeader from "./CharacterHeader";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
   loadAllCharacters,
   loadCharsShown,
-  filterCharacters,
 } from "../../redux/actions/charactersActions";
-
 import "../../styles/CharacterList.scss";
+
+import { characterInterface } from "../../interfaces/charsInterface";
+interface Props {
+  characters: characterInterface[];
+  charsShown: characterInterface[];
+  charactersFiltered: characterInterface[];
+  actions: {
+    loadAllCharacters: Function;
+    loadCharsShown: Function;
+  };
+  filters: any;
+}
 
 export function CharacterList({
   actions,
   characters,
   charsShown,
   charactersFiltered,
-}) {
+  filters,
+}: Props) {
   const [pagination, setPagination] = useState(1);
   const charsPerPage = 20;
 
   useEffect(() => {
     actions.loadCharsShown(pagination, charsPerPage);
-  }, [actions, charactersFiltered, pagination]);
+  }, [actions, charactersFiltered, pagination, filters]);
 
   useEffect(() => {
-    if (!characters?.length) {
+    setPagination(0);
+  }, [filters]);
+
+  useEffect(() => {
+    if (!characters.length) {
       actions.loadAllCharacters();
     }
   }, [actions, characters]);
 
-  const [isSticky, setSticky] = useState(false);
-  const ref = useRef(null);
-  const handleScroll = () => {
-    if (ref.current) {
-      setSticky(ref.current.getBoundingClientRect().top <= 0);
-    }
-  };
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", () => handleScroll);
-    };
-  }, []);
-
   return (
-    <div className="charlist">
-      <div className={`charlist__header${isSticky ? " sticky" : ""}`} ref={ref}>
-        PRUEBAAAAAAAAAAAA
-      </div>
-      <button
-        type="button"
-        onClick={() =>
-          actions.filterCharacters({ key: "class", value: "Cerebral" })
-        }
-      >
-        CEREBRAL
-      </button>
-      <button
-        type="button"
-        onClick={() =>
-          actions.filterCharacters({ key: "class", value: "Slasher" })
-        }
-      >
-        SLASHER
-      </button>
-      <button
-        type="button"
-        onClick={() => actions.filterCharacters({ key: "type", value: "DEX" })}
-      >
-        DEX
-      </button>
-      {charsShown.length &&
+    <article className="charlist">
+      <CharacterHeader />
+      {charsShown &&
         charsShown.map((unit) => <Character unit={unit} key={Math.random()} />)}
 
       <ReactPaginate
@@ -81,37 +57,38 @@ export function CharacterList({
         marginPagesDisplayed={2}
         pageRangeDisplayed={5}
         initialPage={0}
-        previousLabel="previous"
-        nextLabel="next"
+        previousLabel="Previous"
+        nextLabel="Next"
         breakLabel="..."
+        breakLinkClassName="charlist__pagination-break"
         containerClassName="charlist__pagination"
         pageClassName="charlist__pagination-page"
         activeClassName="charlist__pagination-active"
         nextLinkClassName="charlist__pagination-next"
-        previosLinkClassName="charlist__pagination-previous"
+        previousLinkClassName="charlist__pagination-previous"
         onPageChange={({ selected }) => {
           window.scrollTo({ top: 0, behavior: "smooth" });
           setPagination(selected);
         }}
       />
-    </div>
+    </article>
   );
 }
 
-export function mapStateToProps(state) {
+export function mapStateToProps(state: any) {
   return {
     characters: state.charactersReducer.characters,
     charsShown: state.charactersReducer.charsShown,
     charactersFiltered: state.charactersReducer.charactersFiltered,
+    filters: state.charactersReducer.filters,
   };
 }
-export function mapDispatchToProps(dispatch) {
+export function mapDispatchToProps(dispatch: any) {
   return {
     actions: bindActionCreators(
       {
         loadAllCharacters,
         loadCharsShown,
-        filterCharacters,
       },
       dispatch
     ),

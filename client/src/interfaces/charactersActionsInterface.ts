@@ -1,4 +1,4 @@
-import { characterInterface } from './stateInterfaces'
+import { characterInterface } from './charsInterface'
 import actionTypes from '../redux/actions/actionTypes'
 
 export type loadOneCharacterAction = {
