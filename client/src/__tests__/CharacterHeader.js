@@ -1,38 +1,24 @@
 import React from "react";
-import { render, unmountComponentAtNode } from "react-dom";
-import { act } from "react-dom/test-utils";
-import { BrowserRouter } from "react-router-dom";
+import "@testing-library/jest-dom/extend-expect";
+import { fireEvent, render, screen } from "@testing-library/react";
+
 import CharacterHeader from "../pages/CharacterList/CharacterHeader";
 
 describe("Given a CharacterHeader component", () => {
-  let container = null;
-  let unit = {
-    stars: 5,
-  };
-  beforeEach(() => {
-    container = document.createElement("div");
-    document.body.appendChild(container);
-  });
-
-  afterEach(() => {
-    unmountComponentAtNode(container);
-    container.remove();
-    container = null;
-  });
-
   describe("When it is invoked", () => {
-    test("Then there should be a header with class charlist__header", () => {
-      act(() => {
-        render(
-          <BrowserRouter>
-            <CharacterHeader />
-          </BrowserRouter>,
-          container
-        );
-      });
+    test("Then there should be a div with text ID", () => {
+      render(<CharacterHeader />);
 
-      const div = document.querySelector(".charlist__header");
-      expect(div).toBeTruthy();
+      const div = screen.getByText("ID");
+      expect(div).toBeInTheDocument();
+    });
+    test("Then there should be a scrollable event", async () => {
+      const fn = jest
+        .spyOn(window, "removeEventListener")
+        .mockImplementation(() => {});
+      render(<CharacterHeader />);
+      await fireEvent.scroll(window, { target: { scrollY: 101 } });
+      expect(fn).toHaveBeenCalled();
     });
   });
 });

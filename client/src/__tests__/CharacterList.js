@@ -98,7 +98,6 @@ describe("Given a mapStateToProps", () => {
     };
     const result = mapStateToProps(state);
     expect(result).toEqual({
-      charactersReducer: state.charactersReducer.charactersReducer,
       characters: state.charactersReducer.characters,
       filters: state.charactersReducer.filters,
       charsShown: state.charactersReducer.charsShown,

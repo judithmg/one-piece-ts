@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   loadOneCharacter,
   loadCharacterDetail,
@@ -7,11 +8,24 @@ import {
   clearFilters,
   costFilter,
 } from "../redux/actions/charactersActions";
-import units from "../data/updatedUnits.json";
-import detail from "../data/details.json";
+import configureStore from "../redux/store/configureStore";
 import actionTypes from "../redux/actions/actionTypes";
 
 describe("Given charactersActions", () => {
+  jest.mock("axios");
+  let store;
+  beforeEach(() => {
+    store = configureStore();
+    axios.get = jest.fn().mockImplementationOnce(() =>
+      Promise.resolve({
+        data: "falseData",
+      })
+    );
+    store.dispatch = jest.fn();
+  });
+  afterEach(() => {
+    store = null;
+  });
   let query = 5;
   let page = 5;
   let charsPerPage = 5;
@@ -28,21 +42,25 @@ describe("Given charactersActions", () => {
     });
   });
   describe("When loadCharacterDetail is called", () => {
-    test("Then an action is returned", () => {
-      const mockReturnValue = loadCharacterDetail(query);
-      expect(mockReturnValue).toEqual({
+    test("Then an action is returned", async () => {
+      const dispatchFunction = loadCharacterDetail(8);
+      await dispatchFunction(store.dispatch);
+
+      expect(store.dispatch).toHaveBeenCalledWith({
         type: actionTypes.LOAD_CHARACTER_DETAIL,
-        query,
-        data: detail,
+        data: "falseData",
+        query: 8,
       });
     });
   });
   describe("When loadAllCharacters is called", () => {
-    test("Then an action is returned", () => {
-      const mockReturnValue = loadAllCharacters();
-      expect(mockReturnValue).toEqual({
+    test("Then an action is returned", async () => {
+      const dispatchFunction = loadAllCharacters();
+      await dispatchFunction(store.dispatch);
+
+      expect(store.dispatch).toHaveBeenCalledWith({
         type: actionTypes.LOAD_ALL_CHARACTERS,
-        data: units,
+        data: "falseData",
       });
     });
   });
