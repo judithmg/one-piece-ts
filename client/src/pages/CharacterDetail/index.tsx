@@ -77,15 +77,15 @@ export function CharacterDetail({
                 <>
                   <img
                     src={`images/${character?.class[0][0]}.png`}
-                    alt="class"
+                    alt={`${character?.class[0][0]}`}
                   />
                   <img
                     src={`images/${character?.class[0][1]}.png`}
-                    alt="class"
+                    alt={`${character?.class[0][1]}`}
                   />
                 </>
-              ) : character?.class?.toLowerCase() === "booster" ? (
-                <img src={`images/evolver.png`} alt="class" />
+              ) : character?.class === "Booster" ? (
+                <img src={`images/evolver.png`} alt="Booster" />
               ) : (
                 <img src={`images/${character?.class}.png`} alt="class" />
               )}
