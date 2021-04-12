@@ -8,7 +8,7 @@ import StarRatings from "../shared/StarRatings";
 interface Props {
   actions: { filterCharacters: Function };
 }
-export function CharacterFilters({ actions }: Props) {
+export function Stars({ actions }: Props) {
   const [opacity, setOpacity] = useState<string[]>([
     "",
     "",
@@ -65,4 +65,4 @@ export function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CharacterFilters);
+export default connect(mapStateToProps, mapDispatchToProps)(Stars);

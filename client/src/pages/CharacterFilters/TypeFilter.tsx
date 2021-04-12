@@ -8,7 +8,7 @@ interface Props {
   actions: { filterCharacters: Function };
 }
 
-export function CharacterFilters({ actions }: Props) {
+export function TypeFilter({ actions }: Props) {
   const [opacity, setOpacity] = useState(["", "", "", "", "", ""]);
 
   const handleClick = (type, index) => {
@@ -55,4 +55,4 @@ export function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CharacterFilters);
+export default connect(mapStateToProps, mapDispatchToProps)(TypeFilter);

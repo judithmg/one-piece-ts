@@ -7,7 +7,7 @@ import filtersArr from "../../constants/filters";
 interface Props {
   actions: { filterCharacters: Function };
 }
-export function CharacterFilters({ actions }: Props) {
+export function ClassFilter({ actions }: Props) {
   const [opacity, setOpacity] = useState(["", "", "", "", "", "", ""]);
 
   const handleClick = (classN, index) => {
@@ -53,4 +53,4 @@ export function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CharacterFilters);
+export default connect(mapStateToProps, mapDispatchToProps)(ClassFilter);
