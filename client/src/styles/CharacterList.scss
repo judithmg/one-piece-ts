@@ -9,6 +9,10 @@
   right: 0;
   z-index: 10;
 }
+.charlist-spinner {
+  @include flex(row, center, center);
+  margin: 50px;
+}
 
 .charlist__pagination {
   @include flex(row, center, center);
