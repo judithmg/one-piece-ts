@@ -1,7 +1,7 @@
 import React from "react";
 import getThumbnailUrl from "../../utils/getThumbnailUrl";
 import { Link } from "react-router-dom";
-import StarRatings from "../shared/StarRatings";
+import StarRatings from "../../components/StarRatings";
 import "../../styles/CharacterRow.scss";
 import { characterInterface } from "../../interfaces/charsInterface";
 interface Props {
