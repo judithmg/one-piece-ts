@@ -10,6 +10,7 @@ export interface charactersState {
     charDetail?: characterDetail
     filters: any[]
     costFilter?: number[]
+    loadingCharacters: boolean
 }
 
 
@@ -20,8 +21,11 @@ export default function charactersReducer(state: charactersState = initialState.
     let result
     let filters
     switch (action.type) {
+
+        case actionTypes.LOADING_CHARACTERS:
+            return { ...state, loadingCharacters: true }
         case actionTypes.LOAD_ALL_CHARACTERS:
-            return { ...state, characters: action.data, charactersFiltered: action.data }
+            return { ...state, characters: action.data, charactersFiltered: action.data, loadingCharacters: false }
 
         case actionTypes.LOAD_ONE_CHARACTER:
             foundCharacter = state?.characters?.find((char) => char.id === action.query)
