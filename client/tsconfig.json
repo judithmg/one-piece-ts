@@ -19,9 +19,12 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react"
+    "jsx": "react-jsx"
   },
   "include": [
-    "./src/**/*.ts"
-, "src/__tests__/CharacterRow.js", "src/__tests__/CharacterList.js", "src/__tests__/padNumber.js"  ]
+    "./src/**/*.ts",
+    "src/__tests__/CharacterRow.js",
+    "src/__tests__/CharacterList.js",
+    "src/__tests__/padNumber.js"
+  ]
 }
