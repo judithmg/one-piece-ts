@@ -8,15 +8,22 @@ export interface Props {
 export default function DetailSpecial({ special, specialName }: Props) {
   return (
     <div className="detail-special">
-      {special.description ? (
-        <>
-          <strong>{specialName}</strong>
-          <span>{special?.description}</span>
-        </>
-      ) : special.length > 3 ? (
+      {special.length > 3 ? (
         <>
           <strong>{specialName}</strong>
           <span>{special}</span>
+        </>
+      ) : special?.character1 ? (
+        <>
+          <strong>{specialName}</strong>
+          <span>
+            <strong>Character 1: </strong>
+            {special.character1}
+          </span>
+          <span>
+            <strong>Character 1: </strong>
+            {special.character2}
+          </span>
         </>
       ) : (
         <>

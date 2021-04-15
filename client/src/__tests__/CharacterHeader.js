@@ -15,7 +15,9 @@ describe("Given a CharacterHeader component", () => {
     test("Then there should be a scrollable event", async () => {
       const fn = jest
         .spyOn(window, "removeEventListener")
-        .mockImplementation(() => {});
+        .mockImplementation(() => {
+          jest.fn();
+        });
       render(<CharacterHeader />);
       await fireEvent.scroll(window, { target: { scrollY: 101 } });
       expect(fn).toHaveBeenCalled();

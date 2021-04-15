@@ -1,5 +1,5 @@
 import React from "react";
-import StarRatings from "../shared/StarRatings";
+import StarRatings from "../../components/StarRatings";
 
 export default function DetailStats({ character }) {
   return (

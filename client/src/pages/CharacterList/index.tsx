@@ -7,9 +7,11 @@ import { bindActionCreators } from "redux";
 import {
   loadAllCharacters,
   loadCharsShown,
+  areCharactersLoading,
 } from "../../redux/actions/charactersActions";
 import "../../styles/CharacterList.scss";
 
+import BeatLoader from "react-spinners/BeatLoader";
 import { characterInterface } from "../../interfaces/charsInterface";
 interface Props {
   characters: characterInterface[];
@@ -18,8 +20,10 @@ interface Props {
   actions: {
     loadAllCharacters: Function;
     loadCharsShown: Function;
+    areCharactersLoading: Function;
   };
   filters: any;
+  loadingCharacters: boolean;
 }
 
 export function CharacterList({
@@ -28,6 +32,7 @@ export function CharacterList({
   charsShown,
   charactersFiltered,
   filters,
+  loadingCharacters,
 }: Props) {
   const [pagination, setPagination] = useState(1);
   const charsPerPage = 20;
@@ -43,14 +48,21 @@ export function CharacterList({
   useEffect(() => {
     if (!characters.length) {
       actions.loadAllCharacters();
+      actions.areCharactersLoading();
     }
   }, [actions, characters]);
 
   return (
     <article className="charlist">
       <CharacterHeader />
-      {charsShown &&
-        charsShown.map((unit) => <Character unit={unit} key={Math.random()} />)}
+      {loadingCharacters ? (
+        <div className="charlist-spinner">
+          <BeatLoader color={"teal"} />
+        </div>
+      ) : (
+        charsShown &&
+        charsShown.map((unit) => <Character unit={unit} key={Math.random()} />)
+      )}
 
       <ReactPaginate
         pageCount={Math.ceil(charactersFiltered.length / charsPerPage)}
@@ -81,6 +93,7 @@ export function mapStateToProps(state: any) {
     charsShown: state.charactersReducer.charsShown,
     charactersFiltered: state.charactersReducer.charactersFiltered,
     filters: state.charactersReducer.filters,
+    loadingCharacters: state.charactersReducer.loadingCharacters,
   };
 }
 export function mapDispatchToProps(dispatch: any) {
@@ -89,6 +102,7 @@ export function mapDispatchToProps(dispatch: any) {
       {
         loadAllCharacters,
         loadCharsShown,
+        areCharactersLoading,
       },
       dispatch
     ),

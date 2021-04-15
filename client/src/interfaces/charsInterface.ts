@@ -28,11 +28,9 @@ interface sailorInterface {
 }
 
 export interface specialInterface {
-    japan?: string
-    global?: string
     character1?: string
     character2?: string
-    description: string
+    description?: string
     cooldown?: Array<number>
 }
 

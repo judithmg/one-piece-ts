@@ -10,6 +10,12 @@ function loadOneCharacter(query: number) {
     }
 }
 
+function areCharactersLoading() {
+    return {
+        type: actionTypes.LOADING_CHARACTERS
+    }
+}
+
 function loadCharacterDetail(query: number) {
     return async (dispatch: AppDispatch) => {
         const { data } = await axios.get(`${dbUrls.base}/details`)
@@ -67,4 +73,5 @@ export {
     filterCharacters,
     clearFilters,
     costFilter,
+    areCharactersLoading
 }

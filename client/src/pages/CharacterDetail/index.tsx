@@ -77,15 +77,15 @@ export function CharacterDetail({
                 <>
                   <img
                     src={`images/${character?.class[0][0]}.png`}
-                    alt="class"
+                    alt={`${character?.class[0][0]}`}
                   />
                   <img
                     src={`images/${character?.class[0][1]}.png`}
-                    alt="class"
+                    alt={`${character?.class[0][1]}`}
                   />
                 </>
-              ) : character?.class?.toLowerCase() === "booster" ? (
-                <img src={`images/evolver.png`} alt="class" />
+              ) : character?.class === "Booster" ? (
+                <img src={`images/evolver.png`} alt="Booster" />
               ) : (
                 <img src={`images/${character?.class}.png`} alt="class" />
               )}
@@ -105,39 +105,48 @@ export function CharacterDetail({
             </div>
           </div>
         </div>
-        {charDetail && <DetailStats character={character} />}
-        <div className="chardetail__column">
-          <div className="chardetail__column-left">
-            <div className="detail-captain">
-              <strong>Captain ability</strong>
-              <DetailCaptain captain={charDetail.captain} />
+        <DetailStats character={character} />
+        {charDetail ? (
+          <>
+            <div className="chardetail__column">
+              <div className="chardetail__column-left">
+                <div className="detail-captain">
+                  <strong>Captain ability</strong>
+                  {charDetail?.captain && (
+                    <DetailCaptain captain={charDetail.captain} />
+                  )}
+                </div>
+                {charDetail.sailor && (
+                  <DetailSailor sailor={charDetail.sailor} />
+                )}
+              </div>
+              <div className="chardetail__column-right">
+                {charDetail.special && (
+                  <DetailSpecial
+                    special={charDetail.special}
+                    specialName={charDetail.specialName}
+                  />
+                )}
+              </div>
             </div>
-            {charDetail?.sailor && <DetailSailor sailor={charDetail.sailor} />}
-          </div>
-          <div className="chardetail__column-right">
-            {charDetail.special && (
-              <DetailSpecial
-                special={charDetail.special}
-                specialName={charDetail.specialName}
-              />
+            {charDetail.limit && (
+              <div className="chardetail__lb">
+                <DetailLB lb={charDetail.limit} />
+              </div>
             )}
-          </div>
-        </div>
-
-        {charDetail.limit && (
-          <div className="chardetail__lb">
-            <DetailLB lb={charDetail.limit} />
-          </div>
-        )}
-        {charDetail.potential && (
-          <div className="chardetail__potential">
-            <DetailPotential potential={charDetail.potential} />
-          </div>
-        )}
-        {charDetail.support && (
-          <div className="chardetail__support">
-            <DetailSupport support={charDetail.support} />
-          </div>
+            {charDetail.potential && (
+              <div className="chardetail__potential">
+                <DetailPotential potential={charDetail.potential} />
+              </div>
+            )}
+            {charDetail.support && (
+              <div className="chardetail__support">
+                <DetailSupport support={charDetail.support} />
+              </div>
+            )}
+          </>
+        ) : (
+          ""
         )}
       </article>
     )

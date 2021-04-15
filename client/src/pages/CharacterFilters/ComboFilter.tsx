@@ -3,11 +3,11 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import filtersArr from "../../constants/filters";
 import { filterCharacters } from "../../redux/actions/charactersActions";
-export interface actionsInterface {
+export interface Props {
   actions: { filterCharacters: Function };
 }
 
-export function CharacterFilters({ actions }: actionsInterface) {
+export function ComboFilter({ actions }: Props) {
   return (
     <div className="charfilters__combo">
       <h2>Combo filters</h2>
@@ -45,4 +45,4 @@ export function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CharacterFilters);
+export default connect(mapStateToProps, mapDispatchToProps)(ComboFilter);
