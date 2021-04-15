@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.ts",
+    "start": "ts-node index.ts",
     "debug": "node --inspect-brk index.ts --runInBand",
     "test": "jest --collect-coverage --watchAll"
   },
@@ -23,8 +23,10 @@
     "jest": "^26.6.3",
     "mongoose": "^5.12.3",
     "morgan": "^1.10.0",
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.7",
+    "ts-node": "^9.1.1"
   },
+  "build": "tsc",
   "devDependencies": {
     "@types/express": "^4.17.11",
     "@types/jest": "^26.0.22",
