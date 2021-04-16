@@ -3,11 +3,12 @@ import React from "react";
 export interface Props {
   specialName: string;
   special: any;
+  theme: boolean;
 }
 
-export default function DetailSpecial({ special, specialName }: Props) {
+export default function DetailSpecial({ special, specialName, theme }: Props) {
   return (
-    <div className="detail-special">
+    <div className={`detail-special ${theme ? "--dark" : ""}`}>
       {special.length > 3 ? (
         <>
           <strong>{specialName}</strong>

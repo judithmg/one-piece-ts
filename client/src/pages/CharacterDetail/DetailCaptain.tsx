@@ -1,8 +1,9 @@
 import React from "react";
 
-export default function DetailCaptain({ captain }) {
+export default function DetailCaptain({ captain, theme }) {
   return (
-    <div className="detail-captain">
+    <div className={`detail-captain ${theme ? "--dark" : ""}`}>
+      <strong>Captain ability</strong>
       {captain?.base && (
         <>
           <strong>Base captain Ability</strong>

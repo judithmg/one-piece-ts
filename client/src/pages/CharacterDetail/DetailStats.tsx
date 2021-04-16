@@ -1,10 +1,15 @@
 import React from "react";
 import StarRatings from "../../components/StarRatings";
+import { characterInterface } from "../../interfaces/charsInterface";
+interface Props {
+  character: characterInterface;
+  theme: boolean;
+}
 
-export default function DetailStats({ character }) {
+export default function DetailStats({ character, theme }: Props) {
   return (
     character && (
-      <div className="chardetail__stats">
+      <div className={`chardetail__stats ${theme ? "--dark" : ""}`}>
         <div className="detail-stats">
           <strong>Combo </strong>
           {character.combo}

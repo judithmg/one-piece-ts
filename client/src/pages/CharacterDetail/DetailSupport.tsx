@@ -1,8 +1,8 @@
 import React from "react";
 
-export default function DetailSupport({ support }) {
+export default function DetailSupport({ support, theme }) {
   return (
-    <>
+    <div className={`chardetail__support ${theme ? "--dark" : ""}`}>
       <li key={Math.random()}>
         <strong>Supported Characters: </strong>
         {support[0].Characters}
@@ -15,6 +15,6 @@ export default function DetailSupport({ support }) {
           </li>
         ))}
       </ul>
-    </>
+    </div>
   );
 }
