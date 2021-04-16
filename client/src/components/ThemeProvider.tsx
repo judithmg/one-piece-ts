@@ -1,19 +1,19 @@
 import React, { useState, createContext } from "react";
 
-type Theme = "dark" | "light";
+type Theme = boolean;
 type ThemeContextT = { theme: Theme; toggleTheme: () => void };
 
 export const ThemeContext = createContext<ThemeContextT>({} as ThemeContextT);
 
 export const ThemeProvider: React.FC = ({ children }) => {
-  const [theme, setTheme] = useState<Theme>("dark");
+  const [theme, setTheme] = useState<Theme>(false);
 
   const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
+    setTheme(!theme);
   };
 
-  const color = theme === "dark" ? "#333" : "#FFF";
-  const backgroundColor = theme === "dark" ? "#FFF" : "#333";
+  const backgroundColor = theme ? "#333" : "#e5e5e5";
+  const color = theme ? "#FFF" : "#333";
 
   document.body.style.color = color;
   document.body.style.backgroundColor = backgroundColor;
