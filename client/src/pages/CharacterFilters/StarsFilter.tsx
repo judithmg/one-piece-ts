@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { filterCharacters } from "../../redux/actions/charactersActions";
 import filtersArr from "../../constants/filters";
-import StarRatings from "../shared/StarRatings";
+import StarRatings from "../../components/StarRatings";
 
 interface Props {
   actions: { filterCharacters: Function };

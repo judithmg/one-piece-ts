@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import getThumbnailUrl from "../../utils/getThumbnailUrl";
 import { Link } from "react-router-dom";
 import StarRatings from "../../components/StarRatings";
 import "../../styles/CharacterRow.scss";
 import { characterInterface } from "../../interfaces/charsInterface";
+import { ThemeContext } from "../../components/ThemeProvider";
 interface Props {
   unit: characterInterface;
 }
 
 export default function CharacterRow({ unit }: Props) {
+  const { theme } = useContext(ThemeContext);
   return (
-    <div className="row__container">
+    <div className={`row__container ${theme ? "--dark" : ""}`}>
       <div className="row__left">
         <div className="row__img">
           <Link to={`/${unit.id}`}>
