@@ -30,7 +30,10 @@ describe("Given charactersActions", () => {
   let page = 5;
   let charsPerPage = 5;
 
-  let filter = {};
+  let filter = {
+    key:'key',
+    value:'value'
+  };
 
   describe("When loadOneCharacter is called", () => {
     test("Then an action is returned", () => {

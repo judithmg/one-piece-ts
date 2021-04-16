@@ -13,7 +13,7 @@ describe("Given a <CharacterDetail />", () => {
   const actions = {
     loadOneCharacter: jest.fn(),
     loadCharacterDetail: jest.fn(),
-    loadAllCharacters: jest.fn(),
+    isOneCharLoading: jest.fn(),
   };
   let character = {
     name: "Makino, Proprietor of a Relaxed Tavern",
@@ -279,68 +279,52 @@ describe("Given a <CharacterDetail />", () => {
       expect(span).toBeInTheDocument();
     });
   });
-  describe("When there are no chars on the state", () => {
-    test("Then loadAllCharacters is called", () => {
-      render(
-        <BrowserRouter match={{ charId: "1" }}>
-          <CharacterDetail
-            actions={actions}
-            character={character}
-            characters={[]}
-            charDetail={charDetail}
-          />
-        </BrowserRouter>
-      );
-
-      expect(actions.loadAllCharacters).toHaveBeenCalled();
-    });
-    test("Then all classes are rendered if it is a dual unit", () => {
-      character.class = [
-        ["Cerebral", "Fighter"],
-        ["Cerebral", "Fighter"],
-        ["Cerebral", "Fighter"],
-      ];
-      render(
-        <BrowserRouter match={{ charId: "1" }}>
-          <CharacterDetail
-            actions={actions}
-            character={character}
-            characters={[]}
-            charDetail={charDetail}
-          />
-        </BrowserRouter>
-      );
-      expect(screen.getByAltText("Cerebral")).toBeInTheDocument();
-    });
-    test("Then Booster is rendered if it is its class", () => {
-      character.class = "Booster";
-      render(
-        <BrowserRouter match={{ charId: "1" }}>
-          <CharacterDetail
-            actions={actions}
-            character={character}
-            characters={[]}
-            charDetail={charDetail}
-          />
-        </BrowserRouter>
-      );
-      expect(screen.getByAltText("Booster")).toBeInTheDocument();
-    });
-    test("Then unit type is used as class if it is a dual unit", () => {
-      character.type = ["str", "dex"];
-      character.name = "Luffy";
-      render(
-        <BrowserRouter match={{ charId: "1" }}>
-          <CharacterDetail
-            actions={actions}
-            character={character}
-            characters={[]}
-            charDetail={charDetail}
-          />
-        </BrowserRouter>
-      );
-      expect(screen.getByText("Luffy")).toHaveClass("detail-name strcolor");
-    });
+  test("Then all classes are rendered if it is a dual unit", () => {
+    character.class = [
+      ["Cerebral", "Fighter"],
+      ["Cerebral", "Fighter"],
+      ["Cerebral", "Fighter"],
+    ];
+    render(
+      <BrowserRouter match={{ charId: "1" }}>
+        <CharacterDetail
+          actions={actions}
+          character={character}
+          characters={[]}
+          charDetail={charDetail}
+        />
+      </BrowserRouter>
+    );
+    expect(screen.getByAltText("Cerebral")).toBeInTheDocument();
+  });
+  test("Then Booster is rendered if it is its class", () => {
+    character.class = "Booster";
+    render(
+      <BrowserRouter match={{ charId: "1" }}>
+        <CharacterDetail
+          actions={actions}
+          character={character}
+          characters={[]}
+          charDetail={charDetail}
+        />
+      </BrowserRouter>
+    );
+    expect(screen.getByAltText("Booster")).toBeInTheDocument();
+  });
+  test("Then unit type is used as class if it is a dual unit", () => {
+    character.type = ["str", "dex"];
+    character.name = "Luffy";
+    render(
+      <BrowserRouter match={{ charId: "1" }}>
+        <CharacterDetail
+          actions={actions}
+          character={character}
+          characters={[]}
+          charDetail={charDetail}
+        />
+      </BrowserRouter>
+    );
+    expect(screen.getByText("Luffy")).toHaveClass("detail-name strcolor");
   });
 });
 
@@ -366,6 +350,6 @@ describe("Given a mapDispatchToProps", () => {
   test("it should return an object", () => {
     const dispatch = jest.fn();
     const result = mapDispatchToProps(dispatch);
-    expect(result.actions.loadAllCharacters).toBeTruthy();
+    expect(result.actions.isOneCharLoading).toBeTruthy();
   });
 });
