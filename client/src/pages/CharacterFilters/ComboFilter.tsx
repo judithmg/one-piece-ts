@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import filtersArr from "../../constants/filters";
@@ -8,17 +8,36 @@ export interface Props {
 }
 
 export function ComboFilter({ actions }: Props) {
+  const [opacity, setOpacity] = useState<string[]>([
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+  ]);
+
+  const handleClick = (combo, index) => {
+    actions.filterCharacters({ key: "combo", value: combo });
+    const newOpacity = [...opacity];
+    opacity[index] === "" || opacity[index] === null
+      ? (newOpacity[index] = "--applied")
+      : (newOpacity[index] = "");
+    setOpacity(newOpacity);
+  };
   return (
     <div className="charfilters__combo">
       <h2>Combo filters</h2>
 
-      {filtersArr.combo.map((combo) => (
+      {filtersArr.combo.map((combo, index) => (
         <button
           type="button"
-          onClick={() =>
-            actions.filterCharacters({ key: "combo", value: combo })
-          }
-          className={`btn-filter btn-filter-combo`}
+          onClick={() => handleClick(combo, index)}
+          className={`${opacity[index]} btn-filter btn-filter-combo`}
           key={Math.random()}
         >
           {combo}

@@ -12,6 +12,8 @@ import ClassFilter from "./ClassFilter";
 import ComboFilter from "./ComboFilter";
 import CostFilter from "./CostFilter";
 
+import Toggle from "../../components/Toggle";
+
 interface Props {
   actions: {
     filterCharacters: Function;
@@ -21,7 +23,10 @@ interface Props {
 
 export function CharacterFilters({ actions }: Props) {
   return (
-    <article className="charfilters">
+    <article className="charfilters" data-aos="fade-in">
+      <div className="toggle-container">
+        <Toggle />
+      </div>
       <TypeFilter />
       <ClassFilter />
       <ComboFilter />
