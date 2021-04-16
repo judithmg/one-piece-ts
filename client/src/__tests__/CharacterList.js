@@ -11,7 +11,7 @@ import {
 describe("Given a CharacterList component", () => {
   let container;
 
-  let actions = { loadAllCharacters: jest.fn(), loadCharsShown: jest.fn() };
+  let actions = { areCharactersLoading: jest.fn(), loadCharsShown: jest.fn() };
   let character = {
     name: "Makino, Proprietor of a Relaxed Tavern",
     type: "PSY",
@@ -67,23 +67,6 @@ describe("Given a CharacterList component", () => {
     const article = document.querySelector("article");
     expect(article).toBeTruthy();
   });
-  test("Then actions is called if there are no characters", () => {
-    act(() => {
-      render(
-        <BrowserRouter>
-          <CharacterList
-            actions={actions}
-            characters=""
-            charsShown={charsShown}
-            charactersFiltered={charactersFiltered}
-            filter={filters}
-          ></CharacterList>
-        </BrowserRouter>,
-        container
-      );
-    });
-    expect(actions.loadAllCharacters).toHaveBeenCalled();
-  });
 });
 
 describe("Given a mapStateToProps", () => {
@@ -109,6 +92,6 @@ describe("Given a mapDispatchToProps", () => {
   test("it should return an object", () => {
     const dispatch = jest.fn();
     const result = mapDispatchToProps(dispatch);
-    expect(result.actions.loadAllCharacters).toBeTruthy();
+    expect(result.actions.areCharactersLoading).toBeTruthy();
   });
 });
