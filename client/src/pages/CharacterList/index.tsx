@@ -53,7 +53,7 @@ export function CharacterList({
   }, [actions, characters]);
 
   return (
-    <article className="charlist">
+    <article className="charlist" data-aos="fade-in">
       <CharacterHeader />
       {loadingCharacters ? (
         <div className="charlist-spinner">
