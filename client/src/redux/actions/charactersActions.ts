@@ -1,18 +1,24 @@
 import actionTypes from './actionTypes'
 import { AppDispatch } from '../store/configureStore'
 import axios from 'axios'
-import dbUrls from '../../constants/dbUrls'
+import { dbUrls } from '../../constants/'
+
+function areCharactersLoading() {
+    return {
+        type: actionTypes.LOADING_CHARACTERS
+    }
+}
+
+function isOneCharLoading() {
+    return {
+        type: actionTypes.LOADING_ONE_CHAR
+    }
+}
 
 function loadOneCharacter(query: number) {
     return {
         type: actionTypes.LOAD_ONE_CHARACTER,
         query
-    }
-}
-
-function areCharactersLoading() {
-    return {
-        type: actionTypes.LOADING_CHARACTERS
     }
 }
 
@@ -45,11 +51,15 @@ function loadCharsShown(page: number, charsPerPage: number) {
     };
 }
 
-function filterCharacters(filter: object) {
-    return {
-        type: actionTypes.FILTER_CHARACTER,
-        filter
-    }
+function filterCharacters(filter: {
+    key: string
+    value: string
+}) {
+    if (filter.key && filter.value)
+        return {
+            type: actionTypes.FILTER_CHARACTER,
+            filter
+        }
 }
 
 function clearFilters() {
@@ -73,5 +83,6 @@ export {
     filterCharacters,
     clearFilters,
     costFilter,
-    areCharactersLoading
+    areCharactersLoading,
+    isOneCharLoading
 }
