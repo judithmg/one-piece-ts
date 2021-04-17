@@ -10,19 +10,37 @@
   color: $white;
   line-height: 1.5em;
   height: 3em;
-  width: 70vw;
+  width: 90vw;
   border-radius: 5px;
   margin: 10px;
+}
+.header__left {
+  @include flex(row, flex-start, center);
+  width: 70%;
+}
+.header__right {
+  @include flex(row, space-around, center);
+  text-align: center;
+  width: 30%;
+  font-size: 12px;
+  margin: 0 10px;
+  .header__num {
+    width: 8%;
+  }
+  .header__stars {
+    width: 15%;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .charlist__header {
+    width: 70vw;
+  }
   .header__left {
-    @include flex(row, flex-start, center);
     width: 50%;
   }
   .header__right {
-    @include flex(row, space-between, center);
-    text-align: center;
     width: 50%;
-    font-size: 12px;
-    margin: 0 10px;
     .header__num {
       width: 8%;
     }
