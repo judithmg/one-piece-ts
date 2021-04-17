@@ -7,13 +7,15 @@ export default function Togggle() {
   const { toggleTheme } = useContext(ThemeContext);
 
   return (
-    <Toggle
-      defaultChecked={false}
-      icons={{
-        unchecked: <span>🌞</span>,
-        checked: <span>🌚</span>,
-      }}
-      onChange={() => toggleTheme()}
-    />
+    <div className="toggle-container">
+      <Toggle
+        defaultChecked={false}
+        icons={{
+          unchecked: <span>🌞</span>,
+          checked: <span>🌚</span>,
+        }}
+        onChange={() => toggleTheme()}
+      />
+    </div>
   );
 }

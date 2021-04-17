@@ -1,18 +1,8 @@
 import actionTypes from '../actions/actionTypes'
 import { AnyAction } from 'redux'
 import initialState from '../store/initialState'
-import { characterInterface, characterDetail } from '../../interfaces/charsInterface'
-export interface charactersState {
-    characters?: characterInterface[]
-    charactersFiltered?: characterInterface[]
-    character?: characterInterface | null
-    charsShown?: characterInterface[]
-    charDetail?: characterDetail
-    filters: any[]
-    costFilter?: number[]
-    loadingCharacters: boolean
-    loadingOneChar: boolean
-}
+import { characterInterface, filterInterface, charactersState } from '../../interfaces'
+
 
 export default function charactersReducer(state: charactersState = initialState.charactersReducer, action: AnyAction): charactersState {
     let foundCharacter
@@ -59,9 +49,9 @@ export default function charactersReducer(state: charactersState = initialState.
                 tempFilters = [...state.filters, filters];
             }
             if (action.filter.key !== 'stars' && action.filter.key !== 'combo') {
-                result = state?.characters?.filter((unit: any) => tempFilters?.every((filter: any) => unit[filter.key] === filter.value || isNaN(unit[filter.key]) ? unit[filter.key]?.includes(filter.value) : false))
+                result = state?.characters?.filter((unit: characterInterface) => tempFilters?.every((filter: filterInterface) => unit[filter.key] === filter.value || isNaN(unit[filter.key] as any) ? (unit[filter.key] as string | string[])?.includes(filter.value as string) : false))
             } else {
-                result = state?.characters?.filter((unit: any) => tempFilters?.every((filter: any) => unit[filter.key] === filter.value))
+                result = state?.characters?.filter((unit: characterInterface) => tempFilters?.every((filter: filterInterface) => unit[filter.key] === filter.value))
             }
             return {
                 ...state,
@@ -70,7 +60,7 @@ export default function charactersReducer(state: charactersState = initialState.
             }
 
         case actionTypes.COST_FILTER:
-            result = state?.characters?.filter((unit: any) => unit.cost > action.filter[0] && unit.cost < action.filter[1])
+            result = state?.characters?.filter((unit: characterInterface) => (unit.cost as number) > action.filter[0] && (unit.cost as number) < action.filter[1])
             return {
                 ...state,
                 charactersFiltered: result,

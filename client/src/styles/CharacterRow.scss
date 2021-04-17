@@ -9,59 +9,71 @@
   border-radius: 5px;
   background-color: $white;
   margin: 10px;
-  width: 70vw;
+  width: 90vw;
+}
 
-  .row__left {
-    @include flex(row, flex-start, center);
-    width: 50%;
-    .row__img {
-      img {
-        height: 85px;
-      }
+.row__left {
+  @include flex(row, flex-start, center);
+  width: 70%;
+  .row__img {
+    img {
+      height: 85px;
     }
-    .row__names {
-      @include flex(column, flex-start, flex-start);
-      margin-left: 10px;
-      .unit-name {
-        @include text-shadow(0px 1px 1px rgba(0, 0, 0, 0.25));
+  }
+  .row__names {
+    @include flex(column, flex-start, flex-start);
+    margin-left: 10px;
+    .unit-name {
+      @include text-shadow(0px 1px 1px rgba(0, 0, 0, 0.25));
+      font-size: 15px;
+      font-weight: 700;
+    }
+    .unit-alias {
+      color: $lightgray;
+      font-size: 12px;
+    }
+    .unit-class {
+      font-size: 13px;
+    }
+  }
+}
+
+.row__right {
+  @include flex(row, space-between, center);
+  width: 30%;
+  margin: 0 10px;
+  .row__stats {
+    @include flex(row, space-between, center);
+    width: 90%;
+    font-size: 13px;
+    .unit-id {
+      font-weight: 500;
+    }
+
+    .unit-stars {
+      span {
+        color: red;
         font-size: 15px;
-        font-weight: 700;
-      }
-      .unit-alias {
-        color: $lightgray;
-        font-size: 12px;
-      }
-      .unit-class {
-        font-size: 13px;
       }
     }
   }
+  .row__class {
+    @include flex(column, space-around, space-around);
+    height: 100%;
+    img {
+      width: 30px;
+    }
+  }
+}
 
-  .row__right {
-    @include flex(row, space-between, center);
+@media only screen and (min-width: 900px) {
+  .row__container {
+    width: 70vw;
+  }
+  .row__left {
     width: 50%;
-    margin: 0 10px;
-    .row__stats {
-      @include flex(row, space-between, center);
-      width: 90%;
-      font-size: 13px;
-      .unit-id {
-        font-weight: 500;
-      }
-
-      .unit-stars {
-        span {
-          color: red;
-          font-size: 15px;
-        }
-      }
-    }
-    .row__class {
-      @include flex(column, space-around, space-around);
-      height: 100%;
-      img {
-        width: 30px;
-      }
-    }
+  }
+  .row__right {
+    width: 50%;
   }
 }
