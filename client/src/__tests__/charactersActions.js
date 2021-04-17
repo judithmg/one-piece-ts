@@ -7,6 +7,8 @@ import {
   filterCharacters,
   clearFilters,
   costFilter,
+  areCharactersLoading,
+isOneCharLoading
 } from "../redux/actions/charactersActions";
 import configureStore from "../redux/store/configureStore";
 import actionTypes from "../redux/actions/actionTypes";
@@ -41,6 +43,22 @@ describe("Given charactersActions", () => {
       expect(mockReturnValue).toEqual({
         type: actionTypes.LOAD_ONE_CHARACTER,
         query,
+      });
+    });
+  });
+  describe("When areCharactersLoading is called", () => {
+    test("Then an action is returned", () => {
+      const mockReturnValue = areCharactersLoading();
+      expect(mockReturnValue).toEqual({
+        type: actionTypes.LOADING_CHARACTERS,
+      });
+    });
+  });
+  describe("When isOneCharLoading is called", () => {
+    test("Then an action is returned", () => {
+      const mockReturnValue = isOneCharLoading();
+      expect(mockReturnValue).toEqual({
+        type: actionTypes.LOADING_ONE_CHAR,
       });
     });
   });
@@ -84,6 +102,10 @@ describe("Given charactersActions", () => {
         type: actionTypes.FILTER_CHARACTER,
         filter,
       });
+    });
+    test("Then undefined is returned if filter does not have key AND value", () => {
+      const mockReturnValue = filterCharacters({key:''});
+      expect(mockReturnValue).toEqual(undefined);
     });
   });
   describe("When costFilter is called", () => {

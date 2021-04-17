@@ -2,53 +2,13 @@
 @import "./colors";
 @import "./fonts";
 
-.charfilters,
-.chardetail__side {
+.charfilters {
   .toggle-container {
     @include flex(row, flex-end, center);
   }
-  margin-left: 10px;
-  width: 25vw;
-  padding: 10px;
-  position: fixed;
-  overflow-y: auto;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  overflow-x: hidden;
-}
-.chardetail__imgs {
-  @include flex(column, flex-end, center);
-  height: 90%;
-}
-.chardetail__top {
-  @include flex(row, space-between, center);
+  display: none;
 }
 
-.filter-ad_img {
-  width: 25vw;
-}
-.filter-chars_img {
-  max-height: 500px;
-}
-.back-btn {
-  cursor: pointer;
-  @include flex(row, center, center);
-  background-color: $psycolor;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  &:hover {
-    background-color: $qckcolor;
-    img {
-      opacity: 0.5;
-    }
-  }
-  img {
-    width: 20px;
-    opacity: 0.5;
-  }
-}
 .btn-filter-stars {
   .unit-stars {
     .star-ratings {
@@ -104,4 +64,22 @@ button.psy {
 }
 button.int {
   background-color: $intcolor;
+}
+
+@media only screen and (min-width: 900px) {
+  .charfilters {
+    .toggle-container {
+      @include flex(row, flex-end, center);
+    }
+    display: block;
+    margin-left: 10px;
+    width: 25vw;
+    padding: 10px;
+    position: fixed;
+    overflow-y: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    overflow-x: hidden;
+  }
 }

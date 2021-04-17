@@ -1,0 +1,54 @@
+@import "./mixins";
+@import "./colors";
+@import "./fonts";
+
+.chardetail__side {
+  .toggle-container {
+    @include flex(row, flex-end, center);
+  }
+  display: none;
+}
+
+.chardetail__imgs {
+  @include flex(column, flex-end, flex-start);
+  height: 90%;
+}
+
+.chardetail__top {
+  @include flex(row, space-between, center);
+  width: 95vw;
+}
+
+.back-btn {
+  cursor: pointer;
+  @include flex(row, center, center);
+  background-color: $psycolor;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  &:hover {
+    background-color: $qckcolor;
+  }
+  .svg-back {
+    @include flex(row, center, center);
+    opacity: 0.5;
+    width: 22px;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .chardetail__side {
+    .toggle-container {
+      @include flex(row, flex-end, center);
+    }
+    display: block;
+    margin-left: 10px;
+    padding: 10px;
+    position: fixed;
+    overflow-y: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    overflow-x: hidden;
+  }
+}

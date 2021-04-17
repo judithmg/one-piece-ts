@@ -7,11 +7,12 @@
   max-width: 660px;
   height: 100%;
 }
+.chardetail__main-top {
+  width: 97%;
+  margin: 10px;
+}
 .chardetail__main {
   background-color: white;
-  .chardetail__main-top {
-    margin: 10px;
-  }
   .chardetail__main-bottom {
     padding: 0 10px 10px 10px;
     @include flex(row, flex-start, center);
