@@ -2,20 +2,21 @@ import actionTypes from './actionTypes'
 import { AppDispatch } from '../store/configureStore'
 import axios from 'axios'
 import { dbUrls } from '../../constants/'
+import { CharacterActionTypes, filterInterface } from '../../interfaces'
 
-function areCharactersLoading() {
+function areCharactersLoading(): CharacterActionTypes {
     return {
         type: actionTypes.LOADING_CHARACTERS
     }
 }
 
-function isOneCharLoading() {
+function isOneCharLoading(): CharacterActionTypes {
     return {
         type: actionTypes.LOADING_ONE_CHAR
     }
 }
 
-function loadOneCharacter(query: number) {
+function loadOneCharacter(query: number): CharacterActionTypes {
     return {
         type: actionTypes.LOAD_ONE_CHARACTER,
         query
@@ -43,7 +44,7 @@ function loadAllCharacters() {
     }
 }
 
-function loadCharsShown(page: number, charsPerPage: number) {
+function loadCharsShown(page: number, charsPerPage: number): CharacterActionTypes {
     return {
         type: actionTypes.LOAD_CHARS_SHOWN,
         page,
@@ -51,10 +52,7 @@ function loadCharsShown(page: number, charsPerPage: number) {
     };
 }
 
-function filterCharacters(filter: {
-    key: string
-    value: string
-}) {
+function filterCharacters(filter: filterInterface): CharacterActionTypes {
     if (filter.key && filter.value)
         return {
             type: actionTypes.FILTER_CHARACTER,
@@ -62,13 +60,13 @@ function filterCharacters(filter: {
         }
 }
 
-function clearFilters() {
+function clearFilters(): CharacterActionTypes {
     return {
         type: actionTypes.CLEAR_FILTERS
     }
 }
 
-function costFilter(filter: number[]) {
+function costFilter(filter: number[]): CharacterActionTypes {
     return {
         type: actionTypes.COST_FILTER,
         filter
