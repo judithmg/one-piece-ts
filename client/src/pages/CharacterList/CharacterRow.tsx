@@ -44,11 +44,11 @@ export default function CharacterRow({ unit }: Props) {
       </div>
       <div className="row__right">
         <div className="row__stats">
-          <span className="unit-id"># {unit.id}</span>
-          <span className="unit-maxHP">{unit.maxHP}</span>
-          <span className="unit-maxATK">{unit.maxATK}</span>
-          <span className="unit-maxRCV">{unit.maxRCV}</span>
-          <span className="unit-cost">{unit.cost}</span>
+          <span className="unit-id --desktop"># {unit.id}</span>
+          <span className="unit-maxHP --desktop">{unit.maxHP}</span>
+          <span className="unit-maxATK --desktop">{unit.maxATK}</span>
+          <span className="unit-maxRCV --desktop">{unit.maxRCV}</span>
+          <span className="unit-cost --desktop">{unit.cost}</span>
           <StarRatings stars={unit.stars} />
         </div>
         <div className="row__class">

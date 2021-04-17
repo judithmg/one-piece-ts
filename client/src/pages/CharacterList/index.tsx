@@ -5,7 +5,6 @@ import CharacterHeader from "./CharacterHeader";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
-  loadAllCharacters,
   loadCharsShown,
   areCharactersLoading,
 } from "../../redux/actions/charactersActions";
@@ -14,11 +13,9 @@ import "../../styles/CharacterList.scss";
 import BeatLoader from "react-spinners/BeatLoader";
 import { characterInterface } from "../../interfaces/charsInterface";
 interface Props {
-  characters: characterInterface[];
   charsShown: characterInterface[];
   charactersFiltered: characterInterface[];
   actions: {
-    loadAllCharacters: Function;
     loadCharsShown: Function;
     areCharactersLoading: Function;
   };
@@ -28,7 +25,6 @@ interface Props {
 
 export function CharacterList({
   actions,
-  characters,
   charsShown,
   charactersFiltered,
   filters,
@@ -44,13 +40,6 @@ export function CharacterList({
   useEffect(() => {
     setPagination(0);
   }, [filters]);
-
-  useEffect(() => {
-    if (!characters.length) {
-      actions.loadAllCharacters();
-      actions.areCharactersLoading();
-    }
-  }, [actions, characters]);
 
   return (
     <article className="charlist" data-aos="fade-in">
@@ -89,7 +78,6 @@ export function CharacterList({
 
 export function mapStateToProps(state: any) {
   return {
-    characters: state.charactersReducer.characters,
     charsShown: state.charactersReducer.charsShown,
     charactersFiltered: state.charactersReducer.charactersFiltered,
     filters: state.charactersReducer.filters,
@@ -100,7 +88,6 @@ export function mapDispatchToProps(dispatch: any) {
   return {
     actions: bindActionCreators(
       {
-        loadAllCharacters,
         loadCharsShown,
         areCharactersLoading,
       },
