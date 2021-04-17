@@ -24,15 +24,12 @@ interface Props {
 export function CharacterFilters({ actions }: Props) {
   return (
     <article className="charfilters" data-aos="fade-in">
-      <div className="toggle-container">
-        <Toggle />
-      </div>
+      <Toggle />
       <TypeFilter />
       <ClassFilter />
       <ComboFilter />
       <StarsFilter />
       <CostFilter />
-
       <button
         className="btn-filter btn-clear"
         type="button"
