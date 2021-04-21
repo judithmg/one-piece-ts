@@ -1,7 +1,5 @@
 import actionTypes from "./actionTypes";
 import { AppDispatch } from "../store/configureStore";
-import axios from "axios";
-import { dbUrls } from "../../constants/";
 import { CharacterActionTypes, filterInterface } from "../../interfaces";
 
 import details from "../../data/details.json";
