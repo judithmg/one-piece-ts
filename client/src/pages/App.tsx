@@ -27,8 +27,8 @@ AOS.init();
 function App({ actions, characters }: Props) {
   useEffect(() => {
     if (!characters.length) {
-      actions.loadAllCharacters();
       actions.areCharactersLoading();
+      actions.loadAllCharacters();
     }
   }, [actions, characters]);
   return (
