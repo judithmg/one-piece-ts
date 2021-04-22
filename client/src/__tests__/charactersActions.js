@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   loadOneCharacter,
   loadCharacterDetail,
@@ -6,17 +7,35 @@ import {
   filterCharacters,
   clearFilters,
   costFilter,
+  areCharactersLoading,
+isOneCharLoading
 } from "../redux/actions/charactersActions";
-import units from "../data/updatedUnits.json";
-import detail from "../data/details.json";
+import configureStore from "../redux/store/configureStore";
 import actionTypes from "../redux/actions/actionTypes";
 
 describe("Given charactersActions", () => {
+  jest.mock("axios");
+  let store;
+  beforeEach(() => {
+    store = configureStore();
+    axios.get = jest.fn().mockImplementationOnce(() =>
+      Promise.resolve({
+        data: "falseData",
+      })
+    );
+    store.dispatch = jest.fn();
+  });
+  afterEach(() => {
+    store = null;
+  });
   let query = 5;
   let page = 5;
   let charsPerPage = 5;
 
-  let filter = {};
+  let filter = {
+    key:'key',
+    value:'value'
+  };
 
   describe("When loadOneCharacter is called", () => {
     test("Then an action is returned", () => {
@@ -27,22 +46,42 @@ describe("Given charactersActions", () => {
       });
     });
   });
-  describe("When loadCharacterDetail is called", () => {
+  describe("When areCharactersLoading is called", () => {
     test("Then an action is returned", () => {
-      const mockReturnValue = loadCharacterDetail(query);
+      const mockReturnValue = areCharactersLoading();
       expect(mockReturnValue).toEqual({
+        type: actionTypes.LOADING_CHARACTERS,
+      });
+    });
+  });
+  describe("When isOneCharLoading is called", () => {
+    test("Then an action is returned", () => {
+      const mockReturnValue = isOneCharLoading();
+      expect(mockReturnValue).toEqual({
+        type: actionTypes.LOADING_ONE_CHAR,
+      });
+    });
+  });
+  describe("When loadCharacterDetail is called", () => {
+    test("Then an action is returned", async () => {
+      const dispatchFunction = loadCharacterDetail(8);
+      await dispatchFunction(store.dispatch);
+
+      expect(store.dispatch).toHaveBeenCalledWith({
         type: actionTypes.LOAD_CHARACTER_DETAIL,
-        query,
-        data: detail,
+        data: "falseData",
+        query: 8,
       });
     });
   });
   describe("When loadAllCharacters is called", () => {
-    test("Then an action is returned", () => {
-      const mockReturnValue = loadAllCharacters();
-      expect(mockReturnValue).toEqual({
+    test("Then an action is returned", async () => {
+      const dispatchFunction = loadAllCharacters();
+      await dispatchFunction(store.dispatch);
+
+      expect(store.dispatch).toHaveBeenCalledWith({
         type: actionTypes.LOAD_ALL_CHARACTERS,
-        data: units,
+        data: "falseData",
       });
     });
   });
@@ -63,6 +102,10 @@ describe("Given charactersActions", () => {
         type: actionTypes.FILTER_CHARACTER,
         filter,
       });
+    });
+    test("Then undefined is returned if filter does not have key AND value", () => {
+      const mockReturnValue = filterCharacters({key:''});
+      expect(mockReturnValue).toEqual(undefined);
     });
   });
   describe("When costFilter is called", () => {

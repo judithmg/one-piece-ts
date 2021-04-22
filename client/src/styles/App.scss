@@ -14,6 +14,10 @@ li {
   list-style: none;
 }
 
+.--dark {
+  background-color: rgb(38, 53, 68) !important;
+}
+
 button {
   font-family: $Montserrat;
   border-radius: 5px;
@@ -70,4 +74,21 @@ main {
 
 ::-webkit-scrollbar-corner {
   background: transparent;
+}
+
+.--desktop {
+  display: none;
+}
+.--mobile {
+  @include flex(row, center, center);
+  margin-left: 20px;
+}
+
+@media only screen and (min-width: 900px) {
+  .--mobile {
+    display: none;
+  }
+  .--desktop {
+    display: flex;
+  }
 }

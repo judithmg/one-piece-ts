@@ -4,11 +4,11 @@ import { bindActionCreators } from "redux";
 import { filterCharacters } from "../../redux/actions/charactersActions";
 import filtersArr from "../../constants/filters";
 import "../../styles/CharacterFilters.scss";
-export interface actionsInterface {
+interface Props {
   actions: { filterCharacters: Function };
 }
 
-export function CharacterFilters({ actions }: actionsInterface) {
+export function TypeFilter({ actions }: Props) {
   const [opacity, setOpacity] = useState(["", "", "", "", "", ""]);
 
   const handleClick = (type, index) => {
@@ -55,4 +55,4 @@ export function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CharacterFilters);
+export default connect(mapStateToProps, mapDispatchToProps)(TypeFilter);

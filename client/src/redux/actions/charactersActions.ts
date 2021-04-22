@@ -1,8 +1,22 @@
 import actionTypes from './actionTypes'
-import units from '../../data/updatedUnits.json'
-import detail from '../../data/details.json'
+import { AppDispatch } from '../store/configureStore'
+import axios from 'axios'
+import { dbUrls } from '../../constants/'
+import { CharacterActionTypes, filterInterface } from '../../interfaces'
 
-function loadOneCharacter(query: number) {
+function areCharactersLoading(): CharacterActionTypes {
+    return {
+        type: actionTypes.LOADING_CHARACTERS
+    }
+}
+
+function isOneCharLoading(): CharacterActionTypes {
+    return {
+        type: actionTypes.LOADING_ONE_CHAR
+    }
+}
+
+function loadOneCharacter(query: number): CharacterActionTypes {
     return {
         type: actionTypes.LOAD_ONE_CHARACTER,
         query
@@ -10,22 +24,27 @@ function loadOneCharacter(query: number) {
 }
 
 function loadCharacterDetail(query: number) {
-
-    return {
-        type: actionTypes.LOAD_CHARACTER_DETAIL,
-        query,
-        data: detail
+    return async (dispatch: AppDispatch) => {
+        const { data } = await axios.get(`${dbUrls.base}/details`)
+        dispatch({
+            type: actionTypes.LOAD_CHARACTER_DETAIL,
+            data,
+            query
+        })
     }
 }
 
 function loadAllCharacters() {
-    return {
-        type: actionTypes.LOAD_ALL_CHARACTERS,
-        data: units
+    return async (dispatch: AppDispatch) => {
+        const { data } = await axios.get(`${dbUrls.base}/characters`)
+        dispatch({
+            type: actionTypes.LOAD_ALL_CHARACTERS,
+            data
+        })
     }
 }
 
-function loadCharsShown(page: number, charsPerPage: number) {
+function loadCharsShown(page: number, charsPerPage: number): CharacterActionTypes {
     return {
         type: actionTypes.LOAD_CHARS_SHOWN,
         page,
@@ -33,20 +52,21 @@ function loadCharsShown(page: number, charsPerPage: number) {
     };
 }
 
-function filterCharacters(filter: object) {
-    return {
-        type: actionTypes.FILTER_CHARACTER,
-        filter
-    }
+function filterCharacters(filter: filterInterface): CharacterActionTypes {
+    if (filter.key && filter.value)
+        return {
+            type: actionTypes.FILTER_CHARACTER,
+            filter
+        }
 }
 
-function clearFilters() {
+function clearFilters(): CharacterActionTypes {
     return {
         type: actionTypes.CLEAR_FILTERS
     }
 }
 
-function costFilter(filter: number[]) {
+function costFilter(filter: number[]): CharacterActionTypes {
     return {
         type: actionTypes.COST_FILTER,
         filter
@@ -61,4 +81,6 @@ export {
     filterCharacters,
     clearFilters,
     costFilter,
+    areCharactersLoading,
+    isOneCharLoading
 }

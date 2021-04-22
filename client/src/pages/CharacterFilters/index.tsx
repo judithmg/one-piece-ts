@@ -12,22 +12,24 @@ import ClassFilter from "./ClassFilter";
 import ComboFilter from "./ComboFilter";
 import CostFilter from "./CostFilter";
 
-export interface compInterface {
+import Toggle from "../../components/Toggle";
+
+interface Props {
   actions: {
     filterCharacters: Function;
     clearFilters: Function;
   };
 }
 
-export function CharacterFilters({ actions }: compInterface) {
+export function CharacterFilters({ actions }: Props) {
   return (
-    <article className="charfilters">
+    <article className="charfilters" data-aos="fade-in">
+      <Toggle />
       <TypeFilter />
       <ClassFilter />
       <ComboFilter />
       <StarsFilter />
       <CostFilter />
-
       <button
         className="btn-filter btn-clear"
         type="button"

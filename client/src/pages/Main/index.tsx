@@ -5,7 +5,7 @@ export default function Main() {
   return (
     <main>
       <CharacterFilters />
-      <CharacterList></CharacterList>
+      <CharacterList />
     </main>
   );
 }

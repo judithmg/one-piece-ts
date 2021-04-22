@@ -1,8 +1,8 @@
 import React from "react";
 
-export default function DetailSailor({ sailor }) {
+export default function DetailSailor({ sailor, theme }) {
   return (
-    <div className="detail-sailor">
+    <div className={`detail-sailor ${theme ? "--dark" : ""}`}>
       {sailor?.base && (
         <>
           <strong>Base Sailor Ability</strong>

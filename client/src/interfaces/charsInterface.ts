@@ -1,7 +1,7 @@
 export interface characterInterface {
     name?: string
     type?: string | string[]
-    class?: any
+    class?: string | Array<string> | Array<Array<string>>
     stars?: number
     cost?: number
     combo?: number
@@ -21,6 +21,33 @@ export interface characterInterface {
     cooldown?: number[]
 }
 
+interface sailorInterface {
+    base?: string
+    level1?: string
+    level2?: string
+}
+
+export interface specialInterface {
+    character1?: string
+    character2?: string
+    description?: string
+    cooldown?: Array<number>
+}
+
+interface limitInterface {
+    description: string
+}
+
+interface potentialInterface {
+    Name: string
+    description: string[]
+}
+
+interface supportInterface {
+    Characters: string
+    description: string[]
+}
+
 export interface characterDetail {
     id?: number
     captain?: string | {
@@ -28,14 +55,14 @@ export interface characterDetail {
         character2: string
         combined: string
     }
-    special?: string | any
-    sailor?: any
+    special?: string | specialInterface | Array<specialInterface>
+    sailor?: string | sailorInterface
     sailorNotes?: string
     specialName?: string
-    limit?: any
-    potential?: any
-    potentialNotes?: any
-    support?: any
+    limit?: limitInterface[]
+    potential?: potentialInterface[]
+    potentialNotes?: string
+    support?: supportInterface[]
     evolution?: number[] | number
     evolvers?: number[]
     swap?: string

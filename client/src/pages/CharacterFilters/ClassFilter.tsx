@@ -4,10 +4,10 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { filterCharacters } from "../../redux/actions/charactersActions";
 import filtersArr from "../../constants/filters";
-export interface actionsInterface {
+interface Props {
   actions: { filterCharacters: Function };
 }
-export function CharacterFilters({ actions }: actionsInterface) {
+export function ClassFilter({ actions }: Props) {
   const [opacity, setOpacity] = useState(["", "", "", "", "", "", ""]);
 
   const handleClick = (classN, index) => {
@@ -53,4 +53,4 @@ export function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CharacterFilters);
+export default connect(mapStateToProps, mapDispatchToProps)(ClassFilter);

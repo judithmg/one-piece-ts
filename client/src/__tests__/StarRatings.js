@@ -1,7 +1,7 @@
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
 import { BrowserRouter } from "react-router-dom";
-import StarRatings from "../pages/shared/StarRatings";
+import StarRatings from "../components/StarRatings";
 
 describe("Given a StarRatings component", () => {
   let container = null;

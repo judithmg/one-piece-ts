@@ -128,7 +128,7 @@ describe("Given a CharacterRow component", () => {
   });
   describe("When it is a evolver", () => {
     test("Then there are two imgs", () => {
-      unit.class = "booster";
+      unit.class = "Booster";
       act(() => {
         render(
           <BrowserRouter>

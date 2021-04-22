@@ -1,17 +1,7 @@
 import actionTypes from '../actions/actionTypes'
 import { AnyAction } from 'redux'
 import initialState from '../store/initialState'
-import { characterInterface, characterDetail } from '../../interfaces/charsInterface'
-export interface charactersState {
-    characters?: characterInterface[]
-    charactersFiltered?: characterInterface[]
-    character?: characterInterface | null
-    charsShown?: characterInterface[]
-    charDetail?: characterDetail
-    filters: any[]
-    costFilter?: number[]
-}
-
+import { characterInterface, filterInterface, charactersState } from '../../interfaces'
 
 
 export default function charactersReducer(state: charactersState = initialState.charactersReducer, action: AnyAction): charactersState {
@@ -19,9 +9,18 @@ export default function charactersReducer(state: charactersState = initialState.
     let tempFilters: any[]
     let result
     let filters
+    let characters
     switch (action.type) {
+
+        case actionTypes.LOADING_CHARACTERS:
+            return { ...state, loadingCharacters: true }
+
+        case actionTypes.LOADING_ONE_CHAR:
+            return { ...state, loadingOneChar: true }
+
         case actionTypes.LOAD_ALL_CHARACTERS:
-            return { ...state, characters: action.data, charactersFiltered: action.data }
+            characters = action.data?.sort((a: characterInterface, b: characterInterface) => a.id! - b.id!)
+            return { ...state, characters, charactersFiltered: characters, loadingCharacters: false }
 
         case actionTypes.LOAD_ONE_CHARACTER:
             foundCharacter = state?.characters?.find((char) => char.id === action.query)
@@ -34,10 +33,11 @@ export default function charactersReducer(state: charactersState = initialState.
             };
 
         case actionTypes.LOAD_CHARACTER_DETAIL:
-            foundCharacter = action?.data?.find((char: any) => +char.id === action.query)
+            foundCharacter = action?.data?.find((char: any) => +char.id === +action.query)
             return {
                 ...state,
-                charDetail: foundCharacter
+                charDetail: foundCharacter,
+                loadingOneChar: false
             }
 
         case actionTypes.FILTER_CHARACTER:
@@ -49,9 +49,9 @@ export default function charactersReducer(state: charactersState = initialState.
                 tempFilters = [...state.filters, filters];
             }
             if (action.filter.key !== 'stars' && action.filter.key !== 'combo') {
-                result = state?.characters?.filter((unit: any) => tempFilters?.every((filter: any) => unit[filter.key] === filter.value || unit[filter.key].includes(filter.value)))
+                result = state?.characters?.filter((unit: characterInterface) => tempFilters?.every((filter: filterInterface) => unit[filter.key] === filter.value || isNaN(unit[filter.key] as any) ? (unit[filter.key] as string | string[])?.includes(filter.value as string) : false))
             } else {
-                result = state?.characters?.filter((unit: any) => tempFilters?.every((filter: any) => unit[filter.key] === filter.value))
+                result = state?.characters?.filter((unit: characterInterface) => tempFilters?.every((filter: filterInterface) => unit[filter.key] === filter.value))
             }
             return {
                 ...state,
@@ -60,7 +60,7 @@ export default function charactersReducer(state: charactersState = initialState.
             }
 
         case actionTypes.COST_FILTER:
-            result = state?.characters?.filter((unit: any) => unit.cost > action.filter[0] && unit.cost < action.filter[1])
+            result = state?.characters?.filter((unit: characterInterface) => (unit.cost as number) > action.filter[0] && (unit.cost as number) < action.filter[1])
             return {
                 ...state,
                 charactersFiltered: result,

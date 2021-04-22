@@ -5,30 +5,31 @@ import CharacterHeader from "./CharacterHeader";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
-  loadAllCharacters,
   loadCharsShown,
+  areCharactersLoading,
 } from "../../redux/actions/charactersActions";
 import "../../styles/CharacterList.scss";
 
+import BeatLoader from "react-spinners/BeatLoader";
 import { characterInterface } from "../../interfaces/charsInterface";
-export interface compInterface {
-  characters: characterInterface[];
+interface Props {
   charsShown: characterInterface[];
   charactersFiltered: characterInterface[];
   actions: {
-    loadAllCharacters: Function;
     loadCharsShown: Function;
+    areCharactersLoading: Function;
   };
   filters: any;
+  loadingCharacters: boolean;
 }
 
 export function CharacterList({
   actions,
-  characters,
   charsShown,
   charactersFiltered,
   filters,
-}: compInterface) {
+  loadingCharacters,
+}: Props) {
   const [pagination, setPagination] = useState(1);
   const charsPerPage = 20;
 
@@ -40,17 +41,17 @@ export function CharacterList({
     setPagination(0);
   }, [filters]);
 
-  useEffect(() => {
-    if (!characters.length) {
-      actions.loadAllCharacters();
-    }
-  }, [actions, characters]);
-
   return (
-    <article className="charlist">
+    <article className="charlist" data-aos="fade-in">
       <CharacterHeader />
-      {charsShown &&
-        charsShown.map((unit) => <Character unit={unit} key={Math.random()} />)}
+      {loadingCharacters ? (
+        <div className="charlist-spinner">
+          <BeatLoader color={"teal"} />
+        </div>
+      ) : (
+        charsShown &&
+        charsShown.map((unit) => <Character unit={unit} key={Math.random()} />)
+      )}
 
       <ReactPaginate
         pageCount={Math.ceil(charactersFiltered.length / charsPerPage)}
@@ -77,18 +78,18 @@ export function CharacterList({
 
 export function mapStateToProps(state: any) {
   return {
-    characters: state.charactersReducer.characters,
     charsShown: state.charactersReducer.charsShown,
     charactersFiltered: state.charactersReducer.charactersFiltered,
     filters: state.charactersReducer.filters,
+    loadingCharacters: state.charactersReducer.loadingCharacters,
   };
 }
 export function mapDispatchToProps(dispatch: any) {
   return {
     actions: bindActionCreators(
       {
-        loadAllCharacters,
         loadCharsShown,
+        areCharactersLoading,
       },
       dispatch
     ),

@@ -6,11 +6,11 @@ import {
   costFilter,
 } from "../../redux/actions/charactersActions";
 import Slider from "@material-ui/core/Slider";
-export interface actionsInterface {
+interface Props {
   actions: { costFilter: Function };
 }
 
-export function CharacterFilters({ actions }: actionsInterface) {
+export function CostFilter({ actions }: Props) {
   const [value, setValue] = useState([0, 99]);
 
   const handleChange = (event, newValue) => {
@@ -51,4 +51,4 @@ export function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CharacterFilters);
+export default connect(mapStateToProps, mapDispatchToProps)(CostFilter);

@@ -11,7 +11,7 @@ import {
 describe("Given a CharacterList component", () => {
   let container;
 
-  let actions = { loadAllCharacters: jest.fn(), loadCharsShown: jest.fn() };
+  let actions = { areCharactersLoading: jest.fn(), loadCharsShown: jest.fn() };
   let character = {
     name: "Makino, Proprietor of a Relaxed Tavern",
     type: "PSY",
@@ -34,7 +34,6 @@ describe("Given a CharacterList component", () => {
     family: "Makino",
     cooldown: [13, 13],
   };
-  let characters = [character, character];
   let charsShown = [character, character];
   let charactersFiltered = [character, character];
   let filters = [];
@@ -55,7 +54,7 @@ describe("Given a CharacterList component", () => {
         <BrowserRouter>
           <CharacterList
             actions={actions}
-            characters={characters}
+            loadingCharacters={false}
             charsShown={charsShown}
             charactersFiltered={charactersFiltered}
             filter={filters}
@@ -67,13 +66,13 @@ describe("Given a CharacterList component", () => {
     const article = document.querySelector("article");
     expect(article).toBeTruthy();
   });
-  test("Then actions is called if there are no characters", () => {
+  test("There should be a spinner if the are no characters", () => {
     act(() => {
       render(
         <BrowserRouter>
           <CharacterList
             actions={actions}
-            characters=""
+            loadingCharacters={true}
             charsShown={charsShown}
             charactersFiltered={charactersFiltered}
             filter={filters}
@@ -82,7 +81,8 @@ describe("Given a CharacterList component", () => {
         container
       );
     });
-    expect(actions.loadAllCharacters).toHaveBeenCalled();
+    const article = document.querySelector("article");
+    expect(article).toBeTruthy();
   });
 });
 
@@ -90,7 +90,7 @@ describe("Given a mapStateToProps", () => {
   test("it should return a state", () => {
     const state = {
       charactersReducer: {
-        characters: [],
+        loadingCharacters: false,
         filters: [],
         charsShown: [],
         charactersFiltered: [],
@@ -98,8 +98,7 @@ describe("Given a mapStateToProps", () => {
     };
     const result = mapStateToProps(state);
     expect(result).toEqual({
-      charactersReducer: state.charactersReducer.charactersReducer,
-      characters: state.charactersReducer.characters,
+      loadingCharacters: state.charactersReducer.loadingCharacters,
       filters: state.charactersReducer.filters,
       charsShown: state.charactersReducer.charsShown,
       charactersFiltered: state.charactersReducer.charactersFiltered,
@@ -110,6 +109,6 @@ describe("Given a mapDispatchToProps", () => {
   test("it should return an object", () => {
     const dispatch = jest.fn();
     const result = mapDispatchToProps(dispatch);
-    expect(result.actions.loadAllCharacters).toBeTruthy();
+    expect(result.actions.areCharactersLoading).toBeTruthy();
   });
 });

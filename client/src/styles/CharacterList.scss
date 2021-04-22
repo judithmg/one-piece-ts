@@ -10,9 +10,14 @@
   z-index: 10;
 }
 
+.charlist-spinner {
+  @include flex(row, center, center);
+  margin: 50px;
+}
+
 .charlist__pagination {
   @include flex(row, center, center);
-  width: 70vw;
+  width: 90vw;
   height: 40px;
   ul {
     @include flex(row, center, center);
@@ -47,5 +52,12 @@
   .charlist__pagination-active {
     color: $white;
     background-color: $black;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .charlist__pagination {
+    @include flex(row, center, center);
+    width: 70vw;
   }
 }

@@ -3,15 +3,10 @@
 @import "./fonts";
 
 .charfilters {
-  margin-left: 10px;
-  max-width: 25vw;
-  padding: 10px;
-  position: fixed;
-  overflow-y: auto;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  overflow-x: hidden;
+  .toggle-container {
+    @include flex(row, flex-end, center);
+  }
+  display: none;
 }
 
 .btn-filter-stars {
@@ -69,4 +64,22 @@ button.psy {
 }
 button.int {
   background-color: $intcolor;
+}
+
+@media only screen and (min-width: 900px) {
+  .charfilters {
+    .toggle-container {
+      @include flex(row, flex-end, center);
+    }
+    display: block;
+    margin-left: 10px;
+    width: 25vw;
+    padding: 10px;
+    position: fixed;
+    overflow-y: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    overflow-x: hidden;
+  }
 }

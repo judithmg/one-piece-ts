@@ -1,25 +1,30 @@
 import React from "react";
 
-export interface specialInterface {
+export interface Props {
   specialName: string;
   special: any;
+  theme: boolean;
 }
 
-export default function DetailSpecial({
-  special,
-  specialName,
-}: specialInterface) {
+export default function DetailSpecial({ special, specialName, theme }: Props) {
   return (
-    <div className="detail-special">
-      {special.description ? (
-        <>
-          <strong>{specialName}</strong>
-          <span>{special?.description}</span>
-        </>
-      ) : special.length > 3 ? (
+    <div className={`detail-special ${theme ? "--dark" : ""}`}>
+      {special.length > 3 ? (
         <>
           <strong>{specialName}</strong>
           <span>{special}</span>
+        </>
+      ) : special?.character1 ? (
+        <>
+          <strong>{specialName}</strong>
+          <span>
+            <strong>Character 1: </strong>
+            {special.character1}
+          </span>
+          <span>
+            <strong>Character 1: </strong>
+            {special.character2}
+          </span>
         </>
       ) : (
         <>
