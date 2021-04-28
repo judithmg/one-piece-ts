@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import { bindActionCreators, Dispatch } from "redux";
 import filtersArr from "../../constants/filters";
 import { filterCharacters } from "../../redux/actions/charactersActions";
-export interface Props {
-  actions: { filterCharacters: Function };
-}
+import { RootState } from "../../redux/reducers";
 
-export function ComboFilter({ actions }: Props) {
+type Props = ReturnType<typeof mapStateToProps> &
+  ReturnType<typeof mapDispatchToProps>;
+
+const ComboFilter: React.FC<Props> = ({ actions }: Props) => {
   const [opacity, setOpacity] = useState<string[]>([
     "",
     "",
@@ -21,7 +22,7 @@ export function ComboFilter({ actions }: Props) {
     "",
   ]);
 
-  const handleClick = (combo, index) => {
+  const handleClick = (combo: number, index: number) => {
     actions.filterCharacters({ key: "combo", value: combo });
     const newOpacity = [...opacity];
     opacity[index] === "" || opacity[index] === null
@@ -45,15 +46,15 @@ export function ComboFilter({ actions }: Props) {
       ))}
     </div>
   );
-}
+};
 
-export function mapStateToProps(state) {
+export function mapStateToProps(state: RootState) {
   return {
     charactersFiltered: state.charactersReducer.charactersFiltered,
     filters: state.charactersReducer.filters,
   };
 }
-export function mapDispatchToProps(dispatch) {
+export function mapDispatchToProps(dispatch: Dispatch) {
   return {
     actions: bindActionCreators(
       {

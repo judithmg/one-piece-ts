@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import { bindActionCreators, Dispatch } from "redux";
 import {
   filterCharacters,
   clearFilters,
@@ -13,15 +13,11 @@ import ComboFilter from "./ComboFilter";
 import CostFilter from "./CostFilter";
 
 import Toggle from "../../components/Toggle";
+import { RootState } from "../../redux/reducers";
 
-interface Props {
-  actions: {
-    filterCharacters: Function;
-    clearFilters: Function;
-  };
-}
-
-export function CharacterFilters({ actions }: Props) {
+type Props = ReturnType<typeof mapStateToProps> &
+  ReturnType<typeof mapDispatchToProps>;
+const CharacterFilters: React.FC<Props> = ({ actions }: Props) => {
   return (
     <article className="charfilters" data-aos="fade-in">
       <Toggle />
@@ -39,15 +35,15 @@ export function CharacterFilters({ actions }: Props) {
       </button>
     </article>
   );
-}
+};
 
-export function mapStateToProps(state) {
+export function mapStateToProps(state: RootState) {
   return {
     charactersFiltered: state.charactersReducer.charactersFiltered,
     filters: state.charactersReducer.filters,
   };
 }
-export function mapDispatchToProps(dispatch) {
+export function mapDispatchToProps(dispatch: Dispatch) {
   return {
     actions: bindActionCreators(
       {

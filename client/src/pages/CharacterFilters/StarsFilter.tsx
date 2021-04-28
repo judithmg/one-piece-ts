@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import { bindActionCreators, Dispatch } from "redux";
 import { filterCharacters } from "../../redux/actions/charactersActions";
 import filtersArr from "../../constants/filters";
 import StarRatings from "../../components/StarRatings";
+import { RootState } from "../../redux/reducers";
 
-interface Props {
-  actions: { filterCharacters: Function };
-}
-export function Stars({ actions }: Props) {
+type Props = ReturnType<typeof mapStateToProps> &
+  ReturnType<typeof mapDispatchToProps>;
+
+const Stars: React.FC<Props> = ({ actions }: Props) => {
   const [opacity, setOpacity] = useState<string[]>([
     "",
     "",
@@ -21,7 +22,7 @@ export function Stars({ actions }: Props) {
     "",
   ]);
 
-  const handleClick = (stars, index) => {
+  const handleClick = (stars: string | number, index: number) => {
     actions.filterCharacters({ key: "stars", value: stars });
     const newOpacity = [...opacity];
     opacity[index] === "" || opacity[index] === null
@@ -46,15 +47,15 @@ export function Stars({ actions }: Props) {
       ))}
     </div>
   );
-}
+};
 
-export function mapStateToProps(state) {
+export function mapStateToProps(state: RootState) {
   return {
     charactersFiltered: state.charactersReducer.charactersFiltered,
     filters: state.charactersReducer.filters,
   };
 }
-export function mapDispatchToProps(dispatch) {
+export function mapDispatchToProps(dispatch: Dispatch) {
   return {
     actions: bindActionCreators(
       {

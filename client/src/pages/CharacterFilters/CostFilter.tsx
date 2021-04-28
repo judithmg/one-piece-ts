@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import { bindActionCreators, Dispatch } from "redux";
 import {
   filterCharacters,
   costFilter,
 } from "../../redux/actions/charactersActions";
 import Slider from "@material-ui/core/Slider";
-interface Props {
-  actions: { costFilter: Function };
-}
+import { RootState } from "../../redux/reducers";
 
-export function CostFilter({ actions }: Props) {
+type Props = ReturnType<typeof mapStateToProps> &
+  ReturnType<typeof mapDispatchToProps>;
+
+const CostFilter: React.FC<Props> = ({ actions }: Props) => {
   const [value, setValue] = useState([0, 99]);
 
   const handleChange = (event, newValue) => {
@@ -31,15 +32,15 @@ export function CostFilter({ actions }: Props) {
       />
     </div>
   );
-}
+};
 
-export function mapStateToProps(state) {
+export function mapStateToProps(state: RootState) {
   return {
     charactersFiltered: state.charactersReducer.charactersFiltered,
     filters: state.charactersReducer.filters,
   };
 }
-export function mapDispatchToProps(dispatch) {
+export function mapDispatchToProps(dispatch: Dispatch) {
   return {
     actions: bindActionCreators(
       {

@@ -1,17 +1,18 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import { bindActionCreators, Dispatch } from "redux";
 import { filterCharacters } from "../../redux/actions/charactersActions";
 import filtersArr from "../../constants/filters";
 import "../../styles/CharacterFilters.scss";
-interface Props {
-  actions: { filterCharacters: Function };
-}
+import { RootState } from "../../redux/reducers";
 
-export function TypeFilter({ actions }: Props) {
+type Props = ReturnType<typeof mapStateToProps> &
+  ReturnType<typeof mapDispatchToProps>;
+
+const TypeFilter: React.FC<Props> = ({ actions }: Props) => {
   const [opacity, setOpacity] = useState(["", "", "", "", "", ""]);
 
-  const handleClick = (type, index) => {
+  const handleClick = (type: string, index: number) => {
     actions.filterCharacters({ key: "type", value: type });
     const newOpacity = [...opacity];
     opacity[index] === "" || opacity[index] === null
@@ -36,15 +37,15 @@ export function TypeFilter({ actions }: Props) {
       ))}
     </div>
   );
-}
+};
 
-export function mapStateToProps(state) {
+export function mapStateToProps(state: RootState) {
   return {
     charactersFiltered: state.charactersReducer.charactersFiltered,
     filters: state.charactersReducer.filters,
   };
 }
-export function mapDispatchToProps(dispatch) {
+export function mapDispatchToProps(dispatch: Dispatch) {
   return {
     actions: bindActionCreators(
       {

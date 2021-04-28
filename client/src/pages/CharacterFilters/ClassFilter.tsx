@@ -1,16 +1,18 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import { bindActionCreators, Dispatch } from "redux";
 import { filterCharacters } from "../../redux/actions/charactersActions";
 import filtersArr from "../../constants/filters";
-interface Props {
-  actions: { filterCharacters: Function };
-}
-export function ClassFilter({ actions }: Props) {
+import { RootState } from "../../redux/reducers";
+
+type Props = ReturnType<typeof mapStateToProps> &
+  ReturnType<typeof mapDispatchToProps>;
+
+const ClassFilter: React.FC<Props> = ({ actions }: Props) => {
   const [opacity, setOpacity] = useState(["", "", "", "", "", "", ""]);
 
-  const handleClick = (classN, index) => {
+  const handleClick = (classN: string, index: number) => {
     actions.filterCharacters({ key: "class", value: classN });
     const newOpacity = [...opacity];
     opacity[index] === "" || opacity[index] === null
@@ -34,15 +36,15 @@ export function ClassFilter({ actions }: Props) {
       ))}
     </div>
   );
-}
+};
 
-export function mapStateToProps(state) {
+export function mapStateToProps(state: RootState) {
   return {
     charactersFiltered: state.charactersReducer.charactersFiltered,
     filters: state.charactersReducer.filters,
   };
 }
-export function mapDispatchToProps(dispatch) {
+export function mapDispatchToProps(dispatch: Dispatch) {
   return {
     actions: bindActionCreators(
       {
