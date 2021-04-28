@@ -8,22 +8,22 @@ import {
   clearFilters,
   costFilter,
   areCharactersLoading,
-isOneCharLoading
+  isOneCharLoading,
 } from "../redux/actions/charactersActions";
 import configureStore from "../redux/store/configureStore";
 import actionTypes from "../redux/actions/actionTypes";
 
+jest.mock("axios");
 describe("Given charactersActions", () => {
-  jest.mock("axios");
   let store;
   beforeEach(() => {
     store = configureStore();
+    store.dispatch = jest.fn();
     axios.get = jest.fn().mockImplementationOnce(() =>
       Promise.resolve({
         data: "falseData",
       })
     );
-    store.dispatch = jest.fn();
   });
   afterEach(() => {
     store = null;
@@ -33,8 +33,8 @@ describe("Given charactersActions", () => {
   let charsPerPage = 5;
 
   let filter = {
-    key:'key',
-    value:'value'
+    key: "key",
+    value: "value",
   };
 
   describe("When loadOneCharacter is called", () => {
@@ -104,7 +104,7 @@ describe("Given charactersActions", () => {
       });
     });
     test("Then undefined is returned if filter does not have key AND value", () => {
-      const mockReturnValue = filterCharacters({key:''});
+      const mockReturnValue = filterCharacters({ key: "" });
       expect(mockReturnValue).toEqual(undefined);
     });
   });
