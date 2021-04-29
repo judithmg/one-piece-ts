@@ -2,19 +2,14 @@ import React, { useContext, useEffect } from "react";
 import "../../styles/CharacterDetail.scss";
 
 import { useParams } from "react-router-dom";
+import BeatLoader from "react-spinners/BeatLoader";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import { bindActionCreators, Dispatch } from "redux";
 import {
   loadOneCharacter,
   loadCharacterDetail,
   isOneCharLoading,
 } from "../../redux/actions/charactersActions";
-import BeatLoader from "react-spinners/BeatLoader";
-
-import {
-  characterInterface,
-  characterDetail,
-} from "../../interfaces/charsInterface";
 
 import padNumber from "../../utils/padNumber";
 import { dbUrls } from "../../constants";
@@ -28,25 +23,18 @@ import DetailStats from "./DetailStats";
 import DetailSpecial from "./DetailSpecial";
 import DetailCaptain from "./DetailCaptain";
 import { ThemeContext } from "../../components/ThemeProvider";
-interface Props {
-  character: characterInterface;
-  characters: characterInterface[];
-  charDetail: characterDetail;
-  actions: {
-    loadOneCharacter: Function;
-    loadCharacterDetail: Function;
-    isOneCharLoading: Function;
-  };
-  loadingOneChar: boolean;
-}
+import { RootState } from "../../redux/reducers";
 
-export function CharacterDetail({
+type Props = ReturnType<typeof mapStateToProps> &
+  ReturnType<typeof mapDispatchToProps>;
+
+const CharacterDetail: React.FC<Props> = ({
   actions,
   character,
   charDetail,
   loadingOneChar,
   characters,
-}: Props) {
+}: Props) => {
   const { charId } = useParams<{ charId: string }>();
 
   useEffect(() => {
@@ -167,9 +155,9 @@ export function CharacterDetail({
       )}
     </>
   );
-}
+};
 
-export function mapStateToProps(state) {
+export function mapStateToProps(state: RootState) {
   return {
     character: state.charactersReducer.character,
     charDetail: state.charactersReducer.charDetail,
@@ -177,7 +165,7 @@ export function mapStateToProps(state) {
     characters: state.charactersReducer.characters,
   };
 }
-export function mapDispatchToProps(dispatch) {
+export function mapDispatchToProps(dispatch: Dispatch) {
   return {
     actions: bindActionCreators(
       {
